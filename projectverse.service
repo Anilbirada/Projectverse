@@ -1,0 +1,25 @@
+[Unit]
+Description=PROJECTVERSE Production High-Performance Academic Marketplace Application
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/projectverse
+Environment="PATH=/var/www/projectverse/venv/bin"
+EnvironmentFile=/var/www/projectverse/.env
+ExecStart=/var/www/projectverse/venv/bin/uvicorn server:app --host 127.0.0.1 --port 8000 --workers 4
+
+# Restart policies
+Restart=always
+RestartSec=5s
+
+# Security sandboxing
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Resource limits
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target

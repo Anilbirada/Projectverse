@@ -1,0 +1,2280 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROJECTVERSE | Premium College Project Marketplace – 90 Verified Academic Projects</title>
+  <meta name="description" content="Explore 90 verified academic projects across BCA, B.Com, B.Tech, MCA, M.Tech, and IIT-Level Research. Complete source code, IEEE reports, SRS, PPT presentations, and viva preparation. Starting at Rs 799.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0A1128',
+              slate: '#0F172A',
+              purple: '#7C3AED',
+              purpleLight: '#8B5CF6',
+              blue: '#00D2FF',
+              cyan: '#38BDF8',
+              emerald: '#10B981',
+              amber: '#F59E0B',
+              rose: '#F43F5E'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col font-sans antialiased selection:bg-purple-500 selection:text-white">
+
+  <!-- ================= TOP ANNOUNCEMENT BAR ================= -->
+  <div class="bg-gradient-to-r from-brand-navy via-brand-purple to-brand-slate text-white text-xs sm:text-sm py-2 px-4 shadow-inner">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-cyan-400 text-slate-950 uppercase tracking-wide">CATALOGUE 2026-27</span>
+        <span>90 Academic Projects across 6 Categories (BCA, B.Com, B.Tech, MCA, M.Tech, IIT-Grade) – Starting at ₹799</span>
+        
+      </div>
+      <div class="flex items-center gap-4 text-xs">
+        <span class="hidden md:inline-flex items-center gap-1 text-slate-300">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i> 100% Verified Deliverables
+        </span>
+        <span class="inline-flex items-center gap-1 text-slate-300">
+          <i data-lucide="zap" class="w-3.5 h-3.5 text-cyan-400"></i> Instant UPI Verification
+        </span>
+        <a href="#how-it-works" class="hover:text-cyan-300 underline font-medium">How It Works</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN NAVIGATION ================= -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 transition-all duration-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#home" class="flex items-center gap-3 group" onclick="app.navigate('home')">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-navy via-brand-purple to-cyan-500 flex items-center justify-center text-white font-bold text-xl shadow-md group-hover:scale-105 transition-transform">
+          PV
+        </div>
+        <div>
+          <span class="text-2xl font-extrabold tracking-tight text-slate-900 flex items-center">
+            PROJECT<span class="text-gradient">VERSE</span>
+          </span>
+          <span class="block text-[10px] font-semibold tracking-wider text-slate-500 uppercase -mt-1">
+            Ideas Into Innovation
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden lg:flex items-center gap-5 text-sm font-medium text-slate-700">
+        <a href="#home" onclick="app.navigate('home')" class="hover:text-brand-purple transition-colors">Home</a>
+        <a href="#catalogue" onclick="app.navigate('catalogue')" class="hover:text-brand-purple transition-colors flex items-center gap-1">
+          Explore Projects
+          <span class="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700">90</span>
+        </a>
+        <button onclick="app.filterByLevel('BCA')" class="hover:text-brand-purple transition-colors">BCA (15)</button>
+        <button onclick="app.filterByLevel('B.Com')" class="hover:text-emerald-700 transition-colors">B.Com (10)</button>
+        <button onclick="app.filterByLevel('B.Tech')" class="hover:text-blue-700 transition-colors">B.Tech (25)</button>
+        <button onclick="app.filterByLevel('MCA')" class="hover:text-indigo-700 transition-colors">MCA (15)</button>
+        <button onclick="app.filterByLevel('M.Tech')" class="hover:text-amber-700 transition-colors">M.Tech (15)</button>
+        <button onclick="app.filterByLevel('IIT-Level / Research-Grade')" class="hover:text-rose-700 transition-colors flex items-center gap-1 text-rose-600 font-semibold">
+          <i data-lucide="award" class="w-3.5 h-3.5"></i> IIT Research (10)
+        </button>
+        <a href="#help-desk" onclick="app.navigate('help-desk')" class="hover:text-emerald-700 transition-colors flex items-center gap-1.5 font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+          <i data-lucide="life-buoy" class="w-3.5 h-3.5"></i> Help Desk
+        </a>
+      </nav>
+
+      <!-- User Auth / Action Buttons -->
+      <div class="flex items-center gap-3">
+        <!-- Wishlist Button -->
+        <button onclick="app.openWishlist()" class="relative p-2 text-slate-600 hover:text-brand-purple hover:bg-slate-100 rounded-lg transition-colors" title="My Wishlist">
+          <i data-lucide="bookmark" class="w-5 h-5"></i>
+          <span id="nav-wishlist-count" class="hidden absolute top-1 right-1 w-4 h-4 bg-brand-purple text-white text-[10px] font-bold rounded-full flex items-center justify-center">0</span>
+        </button>
+
+        <!-- Dynamic Auth Buttons or User Dropdown -->
+        <div id="nav-auth-container" class="flex items-center gap-2">
+          <!-- Populated by app.js -->
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-btn" onclick="app.toggleMobileMenu()" class="lg:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Menu (Hidden by default) -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-2.5 text-xs sm:text-sm">
+      <a href="#home" onclick="app.navigate('home'); app.toggleMobileMenu();" class="block font-medium text-slate-800 hover:text-brand-purple">Home</a>
+      <a href="#catalogue" onclick="app.navigate('catalogue'); app.toggleMobileMenu();" class="block font-bold text-slate-900">Explore All 90 Projects</a>
+      <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
+        <button onclick="app.filterByLevel('BCA'); app.toggleMobileMenu();" class="text-left font-semibold text-purple-700 py-1">BCA Projects (15)</button>
+        <button onclick="app.filterByLevel('B.Com'); app.toggleMobileMenu();" class="text-left font-semibold text-emerald-700 py-1">B.Com Projects (10)</button>
+        <button onclick="app.filterByLevel('B.Tech'); app.toggleMobileMenu();" class="text-left font-semibold text-blue-700 py-1">B.Tech Projects (25)</button>
+        <button onclick="app.filterByLevel('MCA'); app.toggleMobileMenu();" class="text-left font-semibold text-indigo-700 py-1">MCA Projects (15)</button>
+        <button onclick="app.filterByLevel('M.Tech'); app.toggleMobileMenu();" class="text-left font-semibold text-amber-700 py-1">M.Tech Projects (15)</button>
+        <button onclick="app.filterByLevel('IIT-Level / Research-Grade'); app.toggleMobileMenu();" class="text-left font-semibold text-rose-700 py-1">IIT Research (10)</button>
+      </div>
+      <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+        <a href="#help-desk" onclick="app.navigate('help-desk'); app.toggleMobileMenu();" class="font-bold text-emerald-600 flex items-center gap-1">Help Desk & WhatsApp</a>
+        <a href="#contact" onclick="app.navigate('home', 'contact'); app.toggleMobileMenu();" class="text-slate-600">Contact</a>
+      </div>
+      <div id="mobile-auth-container" class="pt-2 border-t border-slate-100">
+        <!-- Populated by app.js -->
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN VIEW CONTAINER ================= -->
+  <main id="main-content" class="flex-grow">
+    
+    <!-- VIEW: HOME PAGE -->
+    <div id="view-home">
+      
+      <!-- HERO SECTION -->
+      <section class="relative bg-gradient-to-b from-slate-900 via-brand-navy to-slate-900 text-white pt-16 pb-24 overflow-hidden">
+        <!-- Background Tech Grid Overlay -->
+        <div class="absolute inset-0 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:32px_32px] opacity-10"></div>
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-purple/20 blur-[140px] rounded-full pointer-events-none"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Hero Content -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/80 border border-cyan-500/30 text-cyan-300 text-xs font-semibold backdrop-blur-sm">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                Academic Year 2026-2027 Live Catalogue
+              </div>
+
+              <!-- Main Hero Headline as Specified -->
+              <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                Build Your Future with the <br>
+                <span class="text-gradient">Right College Project.</span>
+              </h1>
+
+              <!-- Main Hero Subtitle as Specified -->
+              <p class="text-lg text-slate-300 max-w-2xl leading-relaxed mx-auto lg:mx-0">
+                Explore 90+ innovative academic projects across BCA, B.Com, B.Tech, MCA, M.Tech and advanced research domains.
+              </p>
+
+              <!-- Live Hero Search Bar -->
+              <div class="max-w-xl mx-auto lg:mx-0">
+                <form onsubmit="event.preventDefault(); app.handleHeroSearch();" class="relative flex items-center">
+                  <i data-lucide="search" class="absolute left-4 w-5 h-5 text-slate-400"></i>
+                  <input id="hero-search-input" type="text" placeholder="Search by project name, tech stack, or domain (e.g. AI Resume, GST, RAG)..." 
+                         class="w-full pl-12 pr-32 py-4 bg-slate-800/90 border border-slate-700 rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 shadow-xl text-sm">
+                  <button type="submit" class="absolute right-2 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-brand-purple hover:from-cyan-400 hover:to-purple-500 text-white font-semibold rounded-xl text-xs sm:text-sm transition-all shadow-md">
+                    Explore
+                  </button>
+                </form>
+              </div>
+
+              <!-- 3 Hero Action Buttons as Specified -->
+              <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                <button onclick="app.navigate('catalogue')" class="px-7 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-brand-purple to-purple-600 hover:opacity-95 shadow-lg shadow-purple-600/30 transition-all flex items-center gap-2">
+                  <i data-lucide="layers" class="w-4 h-4"></i> Explore All Projects
+                </button>
+                <button onclick="app.openFindMyProjectModal()" class="px-7 py-3.5 rounded-xl font-bold text-cyan-300 bg-cyan-950/60 hover:bg-cyan-900/60 border border-cyan-500/40 transition-all flex items-center gap-2">
+                  <i data-lucide="compass" class="w-4 h-4 text-cyan-400"></i> Find My Project
+                </button>
+                <a href="https://wa.me/918431712924?text=Hello%20PROJECTVERSE%20Team%2C%20I%20need%20assistance%20selecting%20the%20right%20college%20project." target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl font-bold text-emerald-300 bg-emerald-950/60 hover:bg-emerald-900/60 border border-emerald-500/40 transition-all flex items-center gap-2">
+                  <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i> Talk to Our Team
+                </a>
+              </div>
+
+              <!-- Badges Row -->
+              <div class="flex flex-wrap items-center justify-center lg:justify-start gap-5 pt-3 text-xs text-slate-400 font-medium">
+                <span class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-cyan-400"></i> Exactly 90 Projects</span>
+                <span class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-purple-400"></i> 6 Academic Streams</span>
+                <span class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i> 100% Verified Deliverables</span>
+                <span class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-amber-400"></i> Starting at ₹799</span>
+              </div>
+            </div>
+
+            <!-- Right Hero Visual Card -->
+            <div class="lg:col-span-5 relative">
+              <div class="relative mx-auto max-w-md lg:max-w-none rounded-2xl p-1 bg-gradient-to-b from-cyan-400/30 via-purple-500/20 to-transparent shadow-2xl backdrop-blur-xl">
+                <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-700/60 p-6 space-y-5">
+                  <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                    <div class="flex items-center gap-2">
+                      <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                      <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                      <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                    </div>
+                    <span class="text-xs font-mono text-cyan-400 font-medium">PROJECTVERSE 2026</span>
+                  </div>
+
+                  <!-- Dynamic Featured Hero Image Preview -->
+                  <div class="relative rounded-xl overflow-hidden aspect-video group cursor-pointer" onclick="app.openProjectDetails('BTECH001')">
+                    <img id="hero-featured-img" src="/static/projects/btech/BTECH001.webp" alt="AI-Powered Resume Analyzer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex items-end p-4">
+                      <div>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-400 text-slate-950">FEATURED B.TECH</span>
+                        <h4 class="text-white font-bold text-sm mt-1">BTECH001 – AI Resume Analyzer</h4>
+                        <p class="text-cyan-300 text-xs font-semibold">₹1,079 • Instant Deliverables</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Deliverables Checklist Preview -->
+                  <div class="bg-slate-800/60 rounded-xl p-4 space-y-2 border border-slate-700/50">
+                    <div class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Included in Every Approved Project Package:</div>
+                    <div class="grid grid-cols-2 gap-2 text-xs text-slate-400">
+                      <div class="flex items-center gap-1.5"><i data-lucide="file-code" class="w-3.5 h-3.5 text-cyan-400"></i> Clean Source Code ZIP</div>
+                      <div class="flex items-center gap-1.5"><i data-lucide="database" class="w-3.5 h-3.5 text-emerald-400"></i> Database SQL Schema</div>
+                      <div class="flex items-center gap-1.5"><i data-lucide="book-open" class="w-3.5 h-3.5 text-purple-400"></i> IEEE Final Report</div>
+                      <div class="flex items-center gap-1.5"><i data-lucide="presentation" class="w-3.5 h-3.5 text-amber-400"></i> PPT Presentation Deck</div>
+                      <div class="flex items-center gap-1.5"><i data-lucide="check-square" class="w-3.5 h-3.5 text-blue-400"></i> SRS Specification Document</div>
+                      <div class="flex items-center gap-1.5"><i data-lucide="help-circle" class="w-3.5 h-3.5 text-rose-400"></i> 50+ Viva Q&A Guide</div>
+                    </div>
+                  </div>
+
+                  <!-- Quick Action Button -->
+                  <button onclick="app.openProjectDetails('BTECH001')" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-brand-purple hover:opacity-95 text-white font-semibold rounded-xl text-sm transition-all shadow-md">
+                    View Complete Project Specifications →
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ANIMATED STATISTICS SECTION ================= -->
+      <section class="py-12 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <!-- Statistics Header -->
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+            <div>
+              <h2 class="text-xs font-bold text-brand-purple uppercase tracking-widest">Marketplace Metrics</h2>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Platform Scale & Academic Reach</h3>
+            </div>
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-xs font-semibold shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>100% Genuine Database Records</span>
+            </div>
+          </div>
+
+          <!-- Counter Cards Grid -->
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6">
+            
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center hover:border-purple-300 transition-all">
+              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mx-auto mb-2 font-bold">
+                <i data-lucide="folder-check" class="w-5 h-5"></i>
+              </div>
+              <div class="text-3xl sm:text-4xl font-black text-slate-900" id="stat-counter-projects">90</div>
+              <p class="text-xs font-bold text-slate-600 mt-1 uppercase tracking-wider">Projects Available</p>
+              <p class="text-[11px] text-slate-400 mt-0.5">100% Complete Dossiers</p>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center hover:border-purple-300 transition-all">
+              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mx-auto mb-2 font-bold">
+                <i data-lucide="users" class="w-5 h-5"></i>
+              </div>
+              <div class="text-3xl sm:text-4xl font-black text-brand-purple" id="stat-counter-students">0</div>
+              <p class="text-xs font-bold text-slate-600 mt-1 uppercase tracking-wider" id="stat-student-label">Registered Students</p>
+              <p class="text-[11px] text-emerald-600 font-medium" id="stat-student-sublabel">Genuine Verified Accounts</p>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center hover:border-purple-300 transition-all">
+              <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center mx-auto mb-2 font-bold">
+                <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+              </div>
+              <div class="text-3xl sm:text-4xl font-black text-slate-900" id="stat-counter-categories">6</div>
+              <p class="text-xs font-bold text-slate-600 mt-1 uppercase tracking-wider">Academic Streams</p>
+              <p class="text-[11px] text-slate-400 mt-0.5">BCA to IIT Research</p>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center hover:border-purple-300 transition-all">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-2 font-bold">
+                <i data-lucide="cpu" class="w-5 h-5"></i>
+              </div>
+              <div class="text-3xl sm:text-4xl font-black text-slate-900">30+</div>
+              <p class="text-xs font-bold text-slate-600 mt-1 uppercase tracking-wider">Technology Stacks</p>
+              <p class="text-[11px] text-slate-400 mt-0.5">Python, React, PyTorch</p>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center hover:border-purple-300 transition-all col-span-2 md:col-span-1">
+              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mx-auto mb-2 font-bold">
+                <i data-lucide="user-check" class="w-5 h-5"></i>
+              </div>
+              <div class="text-3xl sm:text-4xl font-black text-slate-900" id="stat-counter-mentors">6</div>
+              <p class="text-xs font-bold text-slate-600 mt-1 uppercase tracking-wider">Faculty Advisors</p>
+              <p class="text-[11px] text-slate-400 mt-0.5">Dedicated Academic Mentors</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 6 ACADEMIC CATEGORIES SECTION ================= -->
+      <section class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-xs font-bold text-brand-purple uppercase tracking-widest">Academic Categories</h2>
+            <h3 class="text-3xl font-extrabold text-slate-900 mt-2">Tailored Projects Across 6 Academic Streams</h3>
+            <p class="text-slate-600 mt-3 text-sm">Every project adheres strictly to university guidelines, syllabus expectations, and IEEE publication standards.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Category 1: BCA -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-purple-400 transition-all group flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
+                    <i data-lucide="monitor" class="w-6 h-6"></i>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-purple-50 text-purple-700 border border-purple-200">15 Projects</span>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-slate-900 group-hover:text-brand-purple transition-colors">BCA Projects</h4>
+                  <p class="text-xs text-slate-500 mt-1">Foundation in application development, relational database systems, and full-stack web platforms.</p>
+                </div>
+                <div class="text-xs text-slate-600 space-y-1">
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-purple-600"></i> Student & Hospital Management</div>
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-purple-600"></i> Online Exam & E-Commerce</div>
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-purple-600"></i> Inventory & Attendance Systems</div>
+                </div>
+              </div>
+              <div class="pt-6 border-t border-slate-100 mt-4 flex items-center justify-between">
+                <span class="text-xs text-slate-500">Starting at <strong class="text-slate-900 font-bold">₹799</strong></span>
+                <button onclick="app.filterByLevel('BCA')" class="text-xs font-bold text-brand-purple hover:underline flex items-center gap-1">
+                  Explore 15 Projects →
+                </button>
+              </div>
+            </div>
+
+            <!-- Category 2: B.Com -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-emerald-400 transition-all group flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                    <i data-lucide="bar-chart-2" class="w-6 h-6"></i>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">10 Projects</span>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">B.Com Projects</h4>
+                  <p class="text-xs text-slate-500 mt-1">Financial analytics, retail performance metrics, GST billing systems, and business intelligence.</p>
+                </div>
+                <div class="text-xs text-slate-600 space-y-1">
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> Business Sales & Financial Ratios</div>
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> GST Billing & Stock Analysis</div>
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> Payroll & Banking Analytics</div>
+                </div>
+              </div>
+              <div class="pt-6 border-t border-slate-100 mt-4 flex items-center justify-between">
+                <span class="text-xs text-slate-500">Starting at <strong class="text-slate-900 font-bold">₹849</strong></span>
+                <button onclick="app.filterByLevel('B.Com')" class="text-xs font-bold text-emerald-600 hover:underline flex items-center gap-1">
+                  Explore 10 Projects →
+                </button>
+              </div>
+            </div>
+
+            <!-- Category 3: B.Tech -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-blue-400 transition-all group flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
+                    <i data-lucide="cpu" class="w-6 h-6"></i>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">25 Projects</span>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-slate-900 group-hover:text-blue-700 transition-colors">B.Tech Projects</h4>
+                  <p class="text-xs text-slate-500 mt-1">Core computer engineering, AI/ML, IoT automation, blockchain, cloud systems, and cybersecurity.</p>
+                </div>
+                <div class="text-xs text-slate-600 space-y-1">
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-blue-600"></i> AI Resume Analyzer & Disease Predictor</div>
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-blue-600"></i> Smart Traffic, IoT & Blockchain Voting</div>
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-blue-600"></i> YOLO Object Detection & Intrusion Defense</div>
+                </div>
+              </div>
+              <div class="pt-6 border-t border-slate-100 mt-4 flex items-center justify-between">
+                <span class="text-xs text-slate-500">Starting at <strong class="text-slate-900 font-bold">₹999</strong></span>
+                <button onclick="app.filterByLevel('B.Tech')" class="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1">
+                  Explore 25 Projects →
+                </button>
+              </div>
+            </div>
+
+            <!-- Category 4: MCA -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-indigo-400 transition-all group flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
+                    <i data-lucide="layers" class="w-6 h-6"></i>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">15 Projects</span>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-slate-900 group-hover:text-indigo-700 transition-colors">MCA Projects</h4>
+                  <p class="text-xs text-slate-500 mt-1">Enterprise multi-tenant platforms, autonomous multi-agent workflows, and RAG knowledge assistants.</p>
+                </div>
+                <div class="text-xs text-slate-600 space-y-1">
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-600"></i> AI College ERP & Multi-Agent Automation</div>
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-600"></i> Retrieval-Augmented Generation (RAG)</div>
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-600"></i> Multi-Tenant SaaS & Intelligent Recruitment</div>
+                </div>
+              </div>
+              <div class="pt-6 border-t border-slate-100 mt-4 flex items-center justify-between">
+                <span class="text-xs text-slate-500">Starting at <strong class="text-slate-900 font-bold">₹1,199</strong></span>
+                <button onclick="app.filterByLevel('MCA')" class="text-xs font-bold text-indigo-600 hover:underline flex items-center gap-1">
+                  Explore 15 Projects →
+                </button>
+              </div>
+            </div>
+
+            <!-- Category 5: M.Tech -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-amber-400 transition-all group flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
+                    <i data-lucide="zap" class="w-6 h-6"></i>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">15 Projects</span>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-slate-900 group-hover:text-amber-700 transition-colors">M.Tech Projects</h4>
+                  <p class="text-xs text-slate-500 mt-1">Postgraduate research in deep medical imaging, explainable AI, federated privacy, and LLM optimization.</p>
+                </div>
+                <div class="text-xs text-slate-600 space-y-1">
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-amber-600"></i> Deep Learning Medical Image Analysis</div>
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-amber-600"></i> Explainable AI (XAI) & Grad-CAM</div>
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-amber-600"></i> Federated Learning & Autonomous Vehicles</div>
+                </div>
+              </div>
+              <div class="pt-6 border-t border-slate-100 mt-4 flex items-center justify-between">
+                <span class="text-xs text-slate-500">Starting at <strong class="text-slate-900 font-bold">₹1,499</strong></span>
+                <button onclick="app.filterByLevel('M.Tech')" class="text-xs font-bold text-amber-600 hover:underline flex items-center gap-1">
+                  Explore 15 Projects →
+                </button>
+              </div>
+            </div>
+
+            <!-- Category 6: IIT-Level / Research-Grade -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md hover:border-rose-400 transition-all group flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold">
+                    <i data-lucide="award" class="w-6 h-6"></i>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">10 Projects</span>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-slate-900 group-hover:text-rose-700 transition-colors">IIT-Level / Research-Grade</h4>
+                  <p class="text-xs text-slate-500 mt-1">Challenging frontier research project ideas inspired by premier institutes (GraphRAG, Qiskit, AlphaFold themes).</p>
+                </div>
+                <div class="text-xs text-slate-600 space-y-1">
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-600"></i> Autonomous AI Multi-Agent Research</div>
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-600"></i> Graph Neural Networks & Protein Folding</div>
+                  <div class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-600"></i> Quantum-Inspired Optimization</div>
+                </div>
+              </div>
+              <div class="pt-6 border-t border-slate-100 mt-4 flex items-center justify-between">
+                <span class="text-xs text-slate-500">Starting at <strong class="text-slate-900 font-bold">₹1,999</strong></span>
+                <button onclick="app.filterByLevel('IIT-Level / Research-Grade')" class="text-xs font-bold text-rose-600 hover:underline flex items-center gap-1">
+                  Explore 10 Projects →
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SHOWCASE: FEATURED & TRENDING PROJECTS ================= -->
+      <section class="py-16 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          
+          <!-- Featured Header -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <span class="text-xs font-bold text-brand-purple uppercase tracking-widest">Handpicked Capstones</span>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Featured Academic Projects</h3>
+            </div>
+            <button onclick="app.navigate('catalogue')" class="text-xs sm:text-sm font-bold text-brand-purple hover:underline flex items-center gap-1">
+              View All 90 Projects →
+            </button>
+          </div>
+
+          <!-- Featured Projects Grid -->
+          <div id="home-featured-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamically populated by app.js -->
+          </div>
+
+          <!-- Section 2: Trending AI & Emerging Technologies -->
+          <div class="pt-8 border-t border-slate-100">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+              <div>
+                <span class="text-xs font-bold text-cyan-600 uppercase tracking-widest">Artificial Intelligence & Deep Learning</span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Trending AI & ML Innovations</h3>
+              </div>
+              <button onclick="app.filterByDomain('Artificial Intelligence')" class="text-xs sm:text-sm font-bold text-cyan-600 hover:underline flex items-center gap-1">
+                View AI Projects →
+              </button>
+            </div>
+            <div id="home-trending-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <!-- Dynamically populated by app.js -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= HOW IT WORKS SECTION ================= -->
+      <section id="how-it-works" class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-xs font-bold text-brand-purple uppercase tracking-widest">Simple Academic Workflow</span>
+            <h3 class="text-3xl font-extrabold text-slate-900 mt-2">How PROJECTVERSE Works</h3>
+            <p class="text-slate-600 text-sm mt-2">Four simple steps to select, request, develop, and successfully defend your college project.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 font-black text-sm flex items-center justify-center">01</div>
+              <h4 class="font-bold text-slate-900 text-sm">Explore 90 Projects</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">Search through categorized projects across BCA, B.Com, B.Tech, MCA, M.Tech, and IIT-level research topics.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 font-black text-sm flex items-center justify-center">02</div>
+              <h4 class="font-bold text-slate-900 text-sm">Review Complete Dossier</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">Examine architecture, DFDs, UML diagrams, ER schemas, module breakdowns, and prerequisites before enrolling.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 font-black text-sm flex items-center justify-center">03</div>
+              <h4 class="font-bold text-slate-900 text-sm">Request or Instant UPI</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">Request academic enrollment with mentor assignment, or purchase instant verified access using official UPI.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 font-black text-sm flex items-center justify-center">04</div>
+              <h4 class="font-bold text-slate-900 text-sm">Defend with Confidence</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">Download IEEE report, source code ZIP, PPT deck, and prepare with 50+ curated viva questions and answers.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= OUR TECHNOLOGY STACK SECTION ================= -->
+      <section class="py-16 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-10">
+            <span class="text-xs font-bold text-cyan-600 uppercase tracking-widest">Modern Engineering</span>
+            <h3 class="text-3xl font-extrabold text-slate-900 mt-2">Our Technology Stack</h3>
+            <p class="text-slate-600 text-sm mt-2">Every project is built with industry-standard, production-ready technologies suited to its specific academic domain.</p>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center hover:border-cyan-400 transition-colors">
+              <div class="font-bold text-slate-900 text-sm">Python & PyTorch</div>
+              <p class="text-[11px] text-slate-500 mt-0.5">Deep Learning & AI</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center hover:border-cyan-400 transition-colors">
+              <div class="font-bold text-slate-900 text-sm">React & Next.js</div>
+              <p class="text-[11px] text-slate-500 mt-0.5">Frontend & Full Stack</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center hover:border-cyan-400 transition-colors">
+              <div class="font-bold text-slate-900 text-sm">FastAPI & Node.js</div>
+              <p class="text-[11px] text-slate-500 mt-0.5">Asynchronous APIs</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center hover:border-cyan-400 transition-colors">
+              <div class="font-bold text-slate-900 text-sm">PostgreSQL & SQLite</div>
+              <p class="text-[11px] text-slate-500 mt-0.5">Relational & 3NF</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center hover:border-cyan-400 transition-colors">
+              <div class="font-bold text-slate-900 text-sm">Pandas & Power BI</div>
+              <p class="text-[11px] text-slate-500 mt-0.5">B.Com Analytics</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center hover:border-cyan-400 transition-colors">
+              <div class="font-bold text-slate-900 text-sm">Docker & Cloud</div>
+              <p class="text-[11px] text-slate-500 mt-0.5">Microservices Deploy</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= STUDENT SUPPORT & MENTORSHIP ================= -->
+      <section class="py-16 bg-slate-900 text-white border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <div class="lg:col-span-7 space-y-5">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold border border-emerald-500/30">
+                <i data-lucide="award" class="w-3.5 h-3.5"></i> Dedicated Academic Faculty
+              </div>
+              <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+                Personal Mentorship from <br>
+                <span class="text-cyan-400">Project Selection to Final Viva Voce.</span>
+              </h3>
+              <p class="text-sm text-slate-300 leading-relaxed">
+                Stuck on IEEE report formatting, database connection errors, or defense slides? Our verified academic mentors and faculty advisors guide enrolled students through every milestone.
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-xs text-slate-300">
+                <div class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Milestone-by-Milestone Progress Tracking</div>
+                <div class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> 1-on-1 WhatsApp Support for Code Setup</div>
+                <div class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Plagiarism-Compliant Documentation</div>
+                <div class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> 50+ Mock Viva Voce Questions & Answers</div>
+              </div>
+              <div class="pt-3">
+                <a href="https://wa.me/918431712924?text=Hello%20PROJECTVERSE%20Faculty%2C%20I%20need%20mentorship%20assistance%20for%20my%20college%20project." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-7 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl text-sm shadow-xl shadow-emerald-500/25 transition-all">
+                  <i data-lucide="message-square" class="w-4 h-4"></i> Talk to Faculty Advisor on WhatsApp
+                </a>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 bg-slate-800/80 p-6 rounded-3xl border border-slate-700/80 space-y-4">
+              <h4 class="font-bold text-sm text-slate-200 uppercase tracking-wider">Active Faculty Advisors Roster</h4>
+              <div id="home-mentors-list" class="space-y-3">
+                <!-- Dynamically populated by app.js -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- VIEW: ADVANCED CATALOGUE (90 PROJECTS) -->
+    <div id="view-catalogue" class="hidden py-8 bg-slate-50 min-h-screen">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        
+        <!-- Catalogue Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-xs font-bold text-brand-purple uppercase tracking-widest">Academic Repository</h2>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Explore 90 Academic Projects</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Filter by academic stream, domain, technology, difficulty, and timeline.</p>
+          </div>
+          <div class="text-right">
+            <span class="text-xs text-slate-500">Showing <strong id="catalogue-count-label" class="text-slate-900 font-bold">90</strong> Projects</span>
+          </div>
+        </div>
+
+        <!-- 6 Academic Category Filter Pills -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+          <button onclick="app.setCategoryFilter('')" id="cat-pill-all" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-brand-navy text-white shadow-sm transition-all">All Projects (90)</button>
+          <button onclick="app.setCategoryFilter('BCA')" id="cat-pill-bca" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-white text-slate-700 hover:bg-purple-50 hover:text-purple-700 border border-slate-200 transition-all">BCA (15)</button>
+          <button onclick="app.setCategoryFilter('B.Com')" id="cat-pill-bcom" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-white text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 border border-slate-200 transition-all">B.Com (10)</button>
+          <button onclick="app.setCategoryFilter('B.Tech')" id="cat-pill-btech" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-white text-slate-700 hover:bg-blue-50 hover:text-blue-700 border border-slate-200 transition-all">B.Tech (25)</button>
+          <button onclick="app.setCategoryFilter('MCA')" id="cat-pill-mca" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-white text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 border border-slate-200 transition-all">MCA (15)</button>
+          <button onclick="app.setCategoryFilter('M.Tech')" id="cat-pill-mtech" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-white text-slate-700 hover:bg-amber-50 hover:text-amber-700 border border-slate-200 transition-all">M.Tech (15)</button>
+          <button onclick="app.setCategoryFilter('IIT-Level / Research-Grade')" id="cat-pill-iit" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-white text-slate-700 hover:bg-rose-50 hover:text-rose-700 border border-slate-200 transition-all">IIT Research (10)</button>
+        </div>
+
+        <!-- Multi-Filter & Search Bar -->
+        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+            
+            <!-- Search Input -->
+            <div class="md:col-span-4 relative">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+              <input type="text" id="filter-search" oninput="app.debounceSearch()" placeholder="Search project title, ID, or keywords..." class="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-purple">
+            </div>
+
+            <!-- Domain Dropdown -->
+            <div class="md:col-span-2">
+              <select id="filter-domain" onchange="app.applyFilters()" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm bg-white">
+                <option value="">All Domains</option>
+                <option value="Artificial Intelligence">AI & Machine Learning</option>
+                <option value="Full Stack Web">Full Stack Web</option>
+                <option value="Financial Analytics">Financial Analytics & Commerce</option>
+                <option value="Cybersecurity">Cybersecurity & Blockchain</option>
+                <option value="IoT">IoT & Smart Systems</option>
+                <option value="Enterprise SaaS">Enterprise & Multi-Agent</option>
+                <option value="Deep Learning">Deep Learning & Research</option>
+              </select>
+            </div>
+
+            <!-- Difficulty Dropdown -->
+            <div class="md:col-span-2">
+              <select id="filter-difficulty" onchange="app.applyFilters()" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm bg-white">
+                <option value="">All Difficulties</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+                <option value="Research">Research Grade</option>
+              </select>
+            </div>
+
+            <!-- Timeline Dropdown -->
+            <div class="md:col-span-2">
+              <select id="filter-timeline" onchange="app.applyFilters()" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm bg-white">
+                <option value="">All Timelines</option>
+                <option value="4-6 Weeks">4-6 Weeks</option>
+                <option value="6-8 Weeks">6-8 Weeks</option>
+                <option value="8-12 Weeks">8-12 Weeks</option>
+                <option value="10-16 Weeks">10-16 Weeks</option>
+              </select>
+            </div>
+
+            <!-- Sort Dropdown -->
+            <div class="md:col-span-2">
+              <select id="filter-sort" onchange="app.applyFilters()" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm bg-white font-medium text-slate-800">
+                <option value="default">Sort: Default</option>
+                <option value="popularity">Most Popular</option>
+                <option value="newest">Recently Added</option>
+                <option value="difficulty">Difficulty Level</option>
+                <option value="price_asc">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
+                <option value="name">Title (A-Z)</option>
+              </select>
+            </div>
+
+          </div>
+
+          <!-- Quick Actions & Reset -->
+          <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+            <span class="text-slate-500">Tip: Click <strong>View Details</strong> on any card to examine DFDs, UML diagrams, and 3NF schemas.</span>
+            <button onclick="app.resetFilters()" class="text-brand-purple hover:underline font-semibold flex items-center gap-1">
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Reset Filters
+            </button>
+          </div>
+        </div>
+
+        <!-- 90 Projects Grid Container -->
+        <div id="catalogue-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Populated by app.js with 90 cards -->
+        </div>
+
+        <!-- Empty Results Placeholder -->
+        <div id="catalogue-empty" class="hidden text-center py-20 bg-white rounded-2xl border border-slate-200">
+          <i data-lucide="folder-search" class="w-12 h-12 text-slate-400 mx-auto mb-3"></i>
+          <h4 class="text-lg font-bold text-slate-800">No Projects Found</h4>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-sm mx-auto">Try clearing active filters or modifying search keywords to view all 90 projects.</p>
+          <button onclick="app.resetFilters()" class="mt-4 px-5 py-2 bg-brand-purple text-white rounded-xl text-xs font-semibold">
+            Reset All Filters
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VIEW: HELP DESK & WHATSAPP SUPPORT -->
+    <div id="view-help-desk" class="hidden py-10 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        
+        <!-- Help Desk Top Banner -->
+        <div class="relative bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-950 text-white rounded-3xl p-8 sm:p-12 border border-emerald-500/30 overflow-hidden shadow-xl">
+          <div class="relative z-10 max-w-3xl space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-semibold">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              Official Academic Support Hotline
+            </div>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
+              Have a Question? <br>
+              <span class="text-emerald-400">Talk Directly With Us on WhatsApp.</span>
+            </h2>
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+              Need help selecting a project, understanding features, checking prices, or completing UPI payment? Message us directly on WhatsApp at <strong>+91 8431712924</strong>.
+            </p>
+            <div class="pt-2 flex flex-wrap items-center gap-4">
+              <a href="https://wa.me/918431712924?text=Hello%20PROJECTVERSE%2C%20I%20need%20academic%20project%20assistance." target="_blank" rel="noopener noreferrer" class="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-2xl text-sm sm:text-base shadow-xl shadow-emerald-500/30 transition-all flex items-center gap-3">
+                <i data-lucide="message-square" class="w-5 h-5"></i>
+                <span>Chat With Us on WhatsApp</span>
+              </a>
+              <span class="text-xs text-slate-300 font-mono flex items-center gap-1.5">
+                <i data-lucide="phone-call" class="w-4 h-4 text-emerald-400"></i> +91 8431712924
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Fast WhatsApp Enquiry Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
+                <i data-lucide="compass" class="w-5 h-5"></i>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm">Project Selection Guidance</h4>
+              <p class="text-xs text-slate-600">Unsure which project fits your course guidelines? Ask for recommendations based on your branch and skillset.</p>
+            </div>
+            <a href="https://wa.me/918431712924?text=Hello%20PROJECTVERSE%2C%20I%20need%20help%20selecting%20a%20project%20for%20my%20course." target="_blank" class="pt-2 text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+              Ask Project Guidance →
+            </a>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                <i data-lucide="qr-code" class="w-5 h-5"></i>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm">UPI Payment & Verification</h4>
+              <p class="text-xs text-slate-600">Questions regarding UTR submission, payee ANIL, bank confirmation, or instant download access?</p>
+            </div>
+            <a href="https://wa.me/918431712924?text=Hello%20PROJECTVERSE%2C%20I%20have%20a%20question%20about%20UPI%20payment%20verification." target="_blank" class="pt-2 text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+              Payment Support →
+            </a>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
+                <i data-lucide="folder-code" class="w-5 h-5"></i>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm">Deliverables & Code Setup</h4>
+              <p class="text-xs text-slate-600">Need help running source code, installing PyTorch/Node libraries, or importing SQL database schemas?</p>
+            </div>
+            <a href="https://wa.me/918431712924?text=Hello%20PROJECTVERSE%2C%20I%20need%20assistance%20with%20source%20code%20and%20deliverables." target="_blank" class="pt-2 text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+              Code Assistance →
+            </a>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
+                <i data-lucide="help-circle" class="w-5 h-5"></i>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm">Viva Voce Preparation</h4>
+              <p class="text-xs text-slate-600">Prepare for external defense with 50+ curated viva questions, algorithm explanations, and architecture slides.</p>
+            </div>
+            <a href="https://wa.me/918431712924?text=Hello%20PROJECTVERSE%2C%20I%20have%20questions%20regarding%20viva%20preparation%20and%20defense." target="_blank" class="pt-2 text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
+              Viva Guidance →
+            </a>
+          </div>
+        </div>
+
+        <!-- Searchable FAQs -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 shadow-sm space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <span class="text-xs font-bold text-brand-purple uppercase tracking-widest">Self-Service Answers</span>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Frequently Asked Questions</h3>
+            </div>
+            <div class="relative max-w-xs w-full">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
+              <input type="text" id="faq-search-input" oninput="app.filterFaqs()" placeholder="Search FAQ topics..." class="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-brand-purple">
+            </div>
+          </div>
+          <div id="help-desk-faq-container" class="space-y-3 pt-2">
+            <!-- Dynamically populated from SQLite /api/faqs -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VIEW: STUDENT DASHBOARD -->
+    <div id="view-student-dashboard" class="hidden py-8 bg-slate-50 min-h-screen">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        
+        <!-- Student Profile Banner -->
+        <div class="bg-gradient-to-r from-brand-navy via-brand-purple to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-md">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-2xl font-black text-cyan-400">
+                <span id="dash-user-initial">S</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h2 class="text-2xl font-black" id="dash-user-name">Student Name</h2>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-400 text-slate-950 uppercase" id="dash-user-role">Student</span>
+                </div>
+                <p class="text-xs text-slate-300 mt-0.5" id="dash-user-college">College / University</p>
+                <p class="text-xs text-slate-400 font-mono mt-0.5" id="dash-user-email">email@domain.com</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <button onclick="app.navigate('catalogue')" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-semibold backdrop-blur-sm transition-all flex items-center gap-2">
+                <i data-lucide="plus-circle" class="w-4 h-4 text-cyan-400"></i> Explore 90 Projects
+              </button>
+              <button onclick="app.logout()" class="px-5 py-2.5 rounded-xl bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 text-red-200 text-xs font-semibold transition-all flex items-center gap-2">
+                <i data-lucide="log-out" class="w-4 h-4"></i> Logout
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Student Dashboard Permanent WhatsApp Assistance Card -->
+        <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-950 rounded-2xl p-5 text-white border border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+          <div class="flex items-center gap-3.5">
+            <div class="w-11 h-11 rounded-xl bg-[#25D366] text-slate-950 flex items-center justify-center flex-shrink-0 shadow-md">
+              <i data-lucide="message-square" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm text-emerald-400">Need Personal Capstone Guidance?</h4>
+              <p class="text-xs text-slate-300">Our faculty support team can help you with project selection, synopsis preparation, code execution, and defense questions.</p>
+            </div>
+          </div>
+          <a href="https://wa.me/918431712924?text=Hello%20PROJECTVERSE%2C%20I%20am%20logged%20into%20my%20student%20dashboard%20and%20need%20assistance." target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-slate-950 font-black text-xs flex items-center gap-2 whitespace-nowrap shadow-lg shadow-[#25D366]/25 transition-all">
+            Talk to Faculty on WhatsApp
+          </a>
+        </div>
+
+        <!-- Dashboard Navigation Tabs (Customer Self-Service) -->
+        <div class="flex border-b border-slate-200 gap-6 font-semibold text-sm overflow-x-auto">
+          <button onclick="app.setDashboardTab('enquiries')" id="tab-dash-enquiries" class="py-3 tab-active flex items-center gap-2 whitespace-nowrap">
+            <i data-lucide="help-circle" class="w-4 h-4 text-amber-500"></i> My Enquiries (<span id="dash-enquiries-count">0</span>)
+          </button>
+          <button onclick="app.setDashboardTab('requests')" id="tab-dash-requests" class="py-3 text-slate-500 hover:text-slate-800 flex items-center gap-2 whitespace-nowrap">
+            <i data-lucide="clipboard-list" class="w-4 h-4 text-blue-500"></i> My Project Requests (<span id="dash-requests-count">0</span>)
+          </button>
+          <button onclick="app.setDashboardTab('orders')" id="tab-dash-orders" class="py-3 text-slate-500 hover:text-slate-800 flex items-center gap-2 whitespace-nowrap">
+            <i data-lucide="receipt" class="w-4 h-4 text-emerald-500"></i> My Orders & Invoices (<span id="dash-orders-count">0</span>)
+          </button>
+          <button onclick="app.setDashboardTab('profile')" id="tab-dash-profile" class="py-3 text-slate-500 hover:text-slate-800 flex items-center gap-2 whitespace-nowrap">
+            <i data-lucide="user-cog" class="w-4 h-4 text-purple-500"></i> Profile & Security
+          </button>
+        </div>
+
+        <!-- Dashboard Tab 1: My Enquiries -->
+        <div id="dash-tab-content-enquiries" class="space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <h4 class="font-bold text-slate-900 text-base">My Project Enquiries</h4>
+              <button onclick="app.navigate('catalogue')" class="px-3.5 py-1.5 bg-brand-purple text-white text-xs font-bold rounded-xl flex items-center gap-1.5">
+                <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i> Enquire for Project
+              </button>
+            </div>
+            <div id="dash-enquiries-container" class="space-y-3">
+              <!-- Populated by app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Tab 2: My Project Requests -->
+        <div id="dash-tab-content-requests" class="hidden space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <h4 class="font-bold text-slate-900 text-base">My Capstone Enrollment Requests</h4>
+            <div id="dash-requests-container" class="space-y-3">
+              <!-- Populated by app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Tab 3: My Orders & Official Invoices -->
+        <div id="dash-tab-content-orders" class="hidden space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <h4 class="font-bold text-slate-900 text-base">My Project Orders & GST Invoices</h4>
+            <div id="dash-orders-container" class="overflow-x-auto">
+              <!-- Populated by app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Tab 4: Profile & Security -->
+        <div id="dash-tab-content-profile" class="hidden space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Profile Info Form -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+              <h4 class="font-bold text-slate-900 text-base pb-2 border-b border-slate-100">Update Profile Information</h4>
+              <form onsubmit="event.preventDefault(); app.handleUpdateProfile();" class="space-y-3">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
+                  <input type="text" id="prof-name" required class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Phone Number</label>
+                  <input type="tel" id="prof-phone" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">College / University</label>
+                  <input type="text" id="prof-college" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Course / Branch</label>
+                  <input type="text" id="prof-course" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                </div>
+                <button type="submit" class="px-5 py-2.5 bg-brand-purple hover:bg-purple-700 text-white font-bold rounded-xl text-xs transition-colors">
+                  Save Profile Changes
+                </button>
+              </form>
+            </div>
+
+            <!-- Change Password Form -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+              <h4 class="font-bold text-slate-900 text-base pb-2 border-b border-slate-100">Change Account Password</h4>
+              <form onsubmit="event.preventDefault(); app.handleChangePassword();" class="space-y-3">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Current Password</label>
+                  <input type="password" id="pwd-old" required class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">New Password (Min 6 chars)</label>
+                  <input type="password" id="pwd-new" required minlength="6" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Confirm New Password</label>
+                  <input type="password" id="pwd-confirm" required minlength="6" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+                </div>
+                <button type="submit" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs transition-colors">
+                  Update Password
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VIEW: FULL ADMIN DASHBOARD -->
+    <div id="view-admin" class="hidden py-8 bg-slate-100 min-h-screen">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        
+        <!-- Admin Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-rose-500 text-white" id="adm-role-badge">ADMINISTRATOR</span>
+              <span class="text-xs text-slate-500">PROJECTVERSE Operations Center</span>
+            </div>
+            <h2 class="text-2xl font-black text-slate-900 mt-1">Enterprise Marketplace Control Center</h2>
+          </div>
+          <div class="flex items-center gap-2">
+            <!-- Admin Notification Centre -->
+            <div class="relative">
+              <button onclick="app.toggleAdminNotifDropdown()" id="adm-notif-bell" class="relative p-2.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 shadow-sm transition-colors" title="Notifications">
+                <i data-lucide="bell" class="w-4 h-4"></i>
+                <span id="adm-notif-count" class="hidden absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-600 text-white text-[10px] font-black flex items-center justify-center">0</span>
+              </button>
+              <div id="adm-notif-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-slate-200 z-50 p-3 space-y-2">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                  <span class="text-xs font-bold text-slate-900">Live Business Alerts</span>
+                  <button onclick="app.markAllNotificationsRead()" class="text-[11px] font-semibold text-brand-purple hover:underline">Mark All Read</button>
+                </div>
+                <div id="adm-notif-list" class="max-h-60 overflow-y-auto space-y-2 text-xs">
+                  <p class="text-slate-400 text-center py-2">No unread notifications</p>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="app.refreshAdminData()" class="px-3.5 py-2 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-sm">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Refresh
+            </button>
+            <button onclick="app.openAdminProjectModal()" class="px-3.5 py-2 bg-brand-purple hover:bg-purple-700 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-sm">
+              <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i> Add Project
+            </button>
+            <button onclick="app.openAdminCsvModal()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-sm">
+              <i data-lucide="upload" class="w-3.5 h-3.5"></i> Import CSV
+            </button>
+          </div>
+        </div>
+
+
+        <!-- Admin KPI Metric Cards (6 Live Genuine Business Metrics) -->
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-3 sm:gap-4">
+          
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+            <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Total Projects</span>
+            <div class="mt-1">
+              <span class="text-2xl sm:text-3xl font-black text-slate-900" id="admin-stat-projects">90</span>
+              <span class="text-[11px] font-medium text-blue-600 block">6 Streams</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+            <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Real Students</span>
+            <div class="mt-1">
+              <span class="text-2xl sm:text-3xl font-black text-purple-600" id="admin-stat-students">0</span>
+              <span class="text-[11px] font-medium text-purple-600 block">Active Profiles</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+            <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">New Enquiries</span>
+            <div class="mt-1">
+              <span class="text-2xl sm:text-3xl font-black text-amber-500" id="admin-stat-enquiries">0</span>
+              <span class="text-[11px] font-medium text-amber-600 block">Unread Leads</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+            <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Project Requests</span>
+            <div class="mt-1">
+              <span class="text-2xl sm:text-3xl font-black text-blue-500" id="admin-stat-requests">0</span>
+              <span class="text-[11px] font-medium text-blue-600 block">Pending Review</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+            <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Pending UPI</span>
+            <div class="mt-1">
+              <span class="text-2xl sm:text-3xl font-black text-cyan-600" id="admin-stat-pending">0</span>
+              <span class="text-[11px] font-medium text-cyan-600 block">Payment Queue</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+            <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Verified Revenue</span>
+            <div class="mt-1">
+              <span class="text-2xl sm:text-3xl font-black text-emerald-600" id="admin-stat-revenue">₹0</span>
+              <span class="text-[11px] font-medium text-emerald-600 block">Approved UPI</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Admin Navigation Tabs -->
+        <div class="flex border-b border-slate-300 gap-6 font-semibold text-sm overflow-x-auto">
+          <button onclick="app.setAdminTab('enquiries')" id="tab-adm-enquiries" class="py-3 tab-active flex items-center gap-1.5 whitespace-nowrap">
+            <i data-lucide="help-circle" class="w-4 h-4 text-amber-500"></i> Project Enquiries (<span id="adm-badge-enquiries">0</span>)
+          </button>
+          <button onclick="app.setAdminTab('requests')" id="tab-adm-requests" class="py-3 text-slate-600 hover:text-slate-900 flex items-center gap-1.5 whitespace-nowrap">
+            <i data-lucide="clipboard-list" class="w-4 h-4 text-blue-500"></i> Project Requests (<span id="adm-badge-requests">0</span>)
+          </button>
+          <button onclick="app.setAdminTab('orders')" id="tab-adm-orders" class="py-3 text-slate-600 hover:text-slate-900 flex items-center gap-1.5 whitespace-nowrap">
+            <i data-lucide="receipt" class="w-4 h-4 text-emerald-500"></i> Orders & Invoices
+          </button>
+          <button onclick="app.setAdminTab('projects')" id="tab-adm-projects" class="py-3 text-slate-600 hover:text-slate-900 flex items-center gap-1.5 whitespace-nowrap">
+            <i data-lucide="layers" class="w-4 h-4 text-purple-500"></i> Projects (90)
+          </button>
+          <button onclick="app.setAdminTab('students')" id="tab-adm-students" class="py-3 text-slate-600 hover:text-slate-900 flex items-center gap-1.5 whitespace-nowrap">
+            <i data-lucide="users" class="w-4 h-4 text-indigo-500"></i> Registered Students
+          </button>
+          <button onclick="app.setAdminTab('email-logs')" id="tab-adm-email-logs" class="py-3 text-slate-600 hover:text-slate-900 flex items-center gap-1.5 whitespace-nowrap">
+            <i data-lucide="mail" class="w-4 h-4 text-rose-500"></i> Email Logs (Owner Alert)
+          </button>
+          <button onclick="app.setAdminTab('payments')" id="tab-adm-payments" class="py-3 text-slate-600 hover:text-slate-900 flex items-center gap-1.5 whitespace-nowrap">
+            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Payment Verification
+          </button>
+          <button onclick="app.setAdminTab('mentors')" id="tab-adm-mentors" class="py-3 text-slate-600 hover:text-slate-900 flex items-center gap-1.5 whitespace-nowrap">
+            <i data-lucide="user-check" class="w-4 h-4"></i> Mentors
+          </button>
+          <button onclick="app.setAdminTab('pricing')" id="tab-adm-pricing" class="py-3 text-slate-600 hover:text-slate-900 flex items-center gap-1.5 whitespace-nowrap">
+            <i data-lucide="tag" class="w-4 h-4"></i> Pricing (Min ₹799)
+          </button>
+          <button onclick="app.setAdminTab('upi')" id="tab-adm-upi" class="py-3 text-slate-600 hover:text-slate-900 flex items-center gap-1.5 whitespace-nowrap">
+            <i data-lucide="qr-code" class="w-4 h-4"></i> UPI & Settings
+          </button>
+        </div>
+
+                <!-- Admin Tab 1: Project Enquiries Management -->
+        <div id="adm-tab-enquiries" class="space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 class="text-base font-bold text-slate-900">Customer Project Enquiries</h3>
+                <p class="text-xs text-slate-500">Live pre-sales inquiries with instant email alerts to aniladani843@gmail.com and WhatsApp follow-up.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <select id="adm-enquiry-status-filter" onchange="app.renderAdminEnquiries()" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white font-medium">
+                  <option value="ALL">All Statuses</option>
+                  <option value="NEW" selected>NEW (Unprocessed)</option>
+                  <option value="CONTACTED">CONTACTED</option>
+                  <option value="IN_DISCUSSION">IN DISCUSSION</option>
+                  <option value="CONVERTED">CONVERTED</option>
+                  <option value="CLOSED">CLOSED</option>
+                </select>
+                <input type="text" id="adm-enquiry-search" oninput="app.renderAdminEnquiries()" placeholder="Search name, phone, project..." class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs">
+              </div>
+            </div>
+            
+            <div class="overflow-x-auto max-h-[600px] overflow-y-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 text-slate-600 font-semibold uppercase text-[10px] sticky top-0 border-b border-slate-200">
+                  <tr>
+                    <th class="py-3 px-3">Enquiry ID & Date</th>
+                    <th class="py-3 px-3">Customer Info</th>
+                    <th class="py-3 px-3">College & Course</th>
+                    <th class="py-3 px-3">Project Enquired</th>
+                    <th class="py-3 px-3">Requirements Message</th>
+                    <th class="py-3 px-3">Status</th>
+                    <th class="py-3 px-3">Admin Notes</th>
+                    <th class="py-3 px-3 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adm-enquiries-table-body" class="divide-y divide-slate-100">
+                  <!-- Populated by app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab 2: Project Requests & Capstone Mentorship -->
+        <div id="adm-tab-requests" class="hidden space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 class="text-base font-bold text-slate-900">Capstone Project Enrollment Requests</h3>
+                <p class="text-xs text-slate-500">Academic capstone requests, mentor assignment, and project progress milestone updates.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <select id="adm-request-status-filter" onchange="app.renderAdminRequests()" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white font-medium">
+                  <option value="ALL">All Statuses</option>
+                  <option value="NEW" selected>NEW / PENDING</option>
+                  <option value="APPROVED">APPROVED</option>
+                  <option value="IN_PROGRESS">IN PROGRESS</option>
+                  <option value="COMPLETED">COMPLETED</option>
+                  <option value="REJECTED">REJECTED</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="overflow-x-auto max-h-[600px] overflow-y-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 text-slate-600 font-semibold uppercase text-[10px] sticky top-0 border-b border-slate-200">
+                  <tr>
+                    <th class="py-3 px-3">Request ID & Date</th>
+                    <th class="py-3 px-3">Student Details</th>
+                    <th class="py-3 px-3">Project & Code</th>
+                    <th class="py-3 px-3">Mode & Timeline</th>
+                    <th class="py-3 px-3">Status</th>
+                    <th class="py-3 px-3">Assigned Mentor</th>
+                    <th class="py-3 px-3">Progress</th>
+                    <th class="py-3 px-3 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adm-requests-table-body" class="divide-y divide-slate-100">
+                  <!-- Populated by app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab 3: Orders & Invoices Management -->
+        <div id="adm-tab-orders" class="hidden space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 class="text-base font-bold text-slate-900">Customer UPI Orders & Official GST Invoices</h3>
+                <p class="text-xs text-slate-500">Verify payments, generate tax invoices (INV-XXXX), and download printable PDF/HTML receipts.</p>
+              </div>
+            </div>
+            
+            <div class="overflow-x-auto max-h-[600px] overflow-y-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 text-slate-600 font-semibold uppercase text-[10px] sticky top-0 border-b border-slate-200">
+                  <tr>
+                    <th class="py-3 px-3">Order Number</th>
+                    <th class="py-3 px-3">Customer</th>
+                    <th class="py-3 px-3">Project Title</th>
+                    <th class="py-3 px-3">Amount (₹)</th>
+                    <th class="py-3 px-3">UTR Reference</th>
+                    <th class="py-3 px-3">Screenshot</th>
+                    <th class="py-3 px-3">Payment Status</th>
+                    <th class="py-3 px-3">Invoice</th>
+                    <th class="py-3 px-3 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adm-orders-table-body" class="divide-y divide-slate-100">
+                  <!-- Populated by app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab 6: Email Notification Audit Logs -->
+        <div id="adm-tab-email-logs" class="hidden space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 class="text-base font-bold text-slate-900">Email Notification Delivery Logs</h3>
+                <p class="text-xs text-slate-500">Audit trail of automated alerts sent to owner (aniladani843@gmail.com) with retry capability.</p>
+              </div>
+              <button onclick="app.renderAdminEmailLogs()" class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Refresh Logs
+              </button>
+            </div>
+            
+            <div class="overflow-x-auto max-h-[600px] overflow-y-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 text-slate-600 font-semibold uppercase text-[10px] sticky top-0 border-b border-slate-200">
+                  <tr>
+                    <th class="py-3 px-3">Timestamp</th>
+                    <th class="py-3 px-3">Event Type</th>
+                    <th class="py-3 px-3">Recipient Email</th>
+                    <th class="py-3 px-3">Subject</th>
+                    <th class="py-3 px-3">Delivery Status</th>
+                    <th class="py-3 px-3">Error / Diagnostics</th>
+                    <th class="py-3 px-3 text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="adm-email-logs-table-body" class="divide-y divide-slate-100 font-mono">
+                  <!-- Populated by app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab 4: Project Management (90 Projects CRUD) -->
+        <div id="adm-tab-projects" class="hidden space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 class="text-base font-bold text-slate-900">Catalogue Projects Master Table (90 Projects)</h3>
+                <p class="text-xs text-slate-500">Manage titles, academic levels, tech summaries, and descriptions. Export to or import from CSV.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="/api/admin/projects/export-csv" class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1">
+                  <i data-lucide="download" class="w-3.5 h-3.5"></i> Export CSV
+                </a>
+                <input type="text" id="adm-project-search" oninput="app.filterAdminProjectsTable()" placeholder="Search project title or code..." class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs">
+              </div>
+            </div>
+            
+            <div class="overflow-x-auto max-h-[600px] overflow-y-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 text-slate-600 font-semibold uppercase text-[10px] sticky top-0 border-b border-slate-200">
+                  <tr>
+                    <th class="py-3 px-4">Code</th>
+                    <th class="py-3 px-4">Title</th>
+                    <th class="py-3 px-4">Category</th>
+                    <th class="py-3 px-4">Domain</th>
+                    <th class="py-3 px-4">Price</th>
+                    <th class="py-3 px-4">Difficulty</th>
+                    <th class="py-3 px-4 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adm-projects-table-body" class="divide-y divide-slate-100">
+                  <!-- Populated by app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab 2: Enrollment Requests & Mentorship -->
+        <div id="adm-tab-enrollments" class="hidden space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 class="text-base font-bold text-slate-900">Student Project Enrollment Requests</h3>
+                <p class="text-xs text-slate-500">Review capstone enrollment submissions, assign mentors, and update milestone progress.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <select id="adm-enroll-filter" onchange="app.renderAdminEnrollments()" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs bg-white">
+                  <option value="">All Statuses</option>
+                  <option value="pending">Pending Approval</option>
+                  <option value="approved">Approved & Active</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="overflow-x-auto max-h-[600px] overflow-y-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 text-slate-600 font-semibold uppercase text-[10px] sticky top-0 border-b border-slate-200">
+                  <tr>
+                    <th class="py-3 px-4">Student & College</th>
+                    <th class="py-3 px-4">Project</th>
+                    <th class="py-3 px-4">Mode</th>
+                    <th class="py-3 px-4">Mentor</th>
+                    <th class="py-3 px-4">Progress & Milestone</th>
+                    <th class="py-3 px-4">Status</th>
+                    <th class="py-3 px-4 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adm-enrollments-table-body" class="divide-y divide-slate-100">
+                  <!-- Populated by app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab 5: Student Roster -->
+        <div id="adm-tab-students" class="hidden space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 class="text-base font-bold text-slate-900">Registered Students Master Roster</h3>
+                <p class="text-xs text-slate-500">Manage verified student registrations and account status.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="text" id="adm-student-search" oninput="app.filterStudentRoster()" placeholder="Search student name, email, college..." class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs">
+                <a href="/api/admin/students/export-csv" class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1">
+                  <i data-lucide="download" class="w-3.5 h-3.5"></i> Export CSV
+                </a>
+              </div>
+            </div>
+            
+            <div class="overflow-x-auto max-h-[600px] overflow-y-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 text-slate-600 font-semibold uppercase text-[10px] sticky top-0 border-b border-slate-200">
+                  <tr>
+                    <th class="py-3 px-4">Student Name</th>
+                    <th class="py-3 px-4">Email</th>
+                    <th class="py-3 px-4">College</th>
+                    <th class="py-3 px-4">Course</th>
+                    <th class="py-3 px-4">Specialization</th>
+                    <th class="py-3 px-4">Enrollments</th>
+                    <th class="py-3 px-4">Data Type</th>
+                  </tr>
+                </thead>
+                <tbody id="adm-students-table-body" class="divide-y divide-slate-100 font-mono">
+                  <!-- Populated by app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab 4: Mentors Management -->
+        <div id="adm-tab-mentors" class="hidden space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-base font-bold text-slate-900">Academic Mentors & Faculty Advisors</h3>
+                <p class="text-xs text-slate-500">Manage advisor profiles, active student quotas, and department specializations.</p>
+              </div>
+              <button onclick="app.openAddMentorModal()" class="px-4 py-2 bg-brand-purple text-white rounded-xl text-xs font-bold">
+                + Add Mentor
+              </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="adm-mentors-grid">
+              <!-- Populated by app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab 5: Payment Verification -->
+        <div id="adm-tab-payments" class="hidden space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <h3 class="text-base font-bold text-slate-900">Student UPI Payment Submissions</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 text-slate-600 font-semibold uppercase text-[10px] border-b border-slate-200">
+                  <tr>
+                    <th class="py-3 px-4">Student</th>
+                    <th class="py-3 px-4">Project</th>
+                    <th class="py-3 px-4">Amount</th>
+                    <th class="py-3 px-4">UTR Reference</th>
+                    <th class="py-3 px-4">Screenshot</th>
+                    <th class="py-3 px-4">Status</th>
+                    <th class="py-3 px-4 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adm-payments-table-body" class="divide-y divide-slate-100">
+                  <!-- Populated by app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab 6: Pricing Manager (Min ₹799 rule) -->
+        <div id="adm-tab-pricing" class="hidden space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Catalogue Pricing Editor</h3>
+              <p class="text-xs text-slate-500">Starting Price Rule: No paid project can be set below ₹799.</p>
+            </div>
+            <div class="overflow-x-auto max-h-[600px] overflow-y-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 text-slate-600 font-semibold uppercase text-[10px] sticky top-0 border-b border-slate-200">
+                  <tr>
+                    <th class="py-3 px-4">Code</th>
+                    <th class="py-3 px-4">Title</th>
+                    <th class="py-3 px-4">Category</th>
+                    <th class="py-3 px-4">Current Price</th>
+                    <th class="py-3 px-4">Update Price (₹)</th>
+                    <th class="py-3 px-4">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="adm-pricing-table-body" class="divide-y divide-slate-100 font-mono">
+                  <!-- Populated by app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab 7: Image Audit (90 Artworks) -->
+        <div id="adm-tab-images" class="hidden space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+            <h3 class="text-base font-bold text-slate-900">Project Image Audit (90 Artworks)</h3>
+            <div id="adm-images-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <!-- Populated by app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab 8: UPI Settings -->
+        <div id="adm-tab-upi" class="hidden space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <div class="md:col-span-7 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+              <h3 class="text-base font-bold text-slate-900">Official UPI Receiving Account</h3>
+              <form onsubmit="event.preventDefault(); app.saveUpiSettings();" class="space-y-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Owner's UPI Mobile Number</label>
+                  <input type="text" id="adm-upi-phone" required class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm font-mono">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Verified UPI ID (VPA)</label>
+                  <input type="text" id="adm-upi-id" required class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm font-mono text-brand-purple font-semibold">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Account Display Name</label>
+                  <input type="text" id="adm-upi-name" required class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Payment Instructions for Students</label>
+                  <textarea id="adm-upi-instructions" rows="3" required class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm"></textarea>
+                </div>
+                <button type="submit" class="px-6 py-2.5 bg-brand-purple hover:bg-purple-700 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all">
+                  Save UPI Payment Settings
+                </button>
+              </form>
+            </div>
+            <div class="md:col-span-5 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4 text-center">
+              <h3 class="text-base font-bold text-slate-900">Official UPI QR Code</h3>
+              <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 max-w-xs mx-auto">
+                <img id="adm-qr-preview" src="/static/uploads/qr/projectverse-upi-qr.png" alt="Official UPI QR Code" class="w-full h-auto rounded-lg shadow-sm">
+              </div>
+              <div>
+                <label class="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold rounded-xl cursor-pointer border border-slate-300 transition-colors">
+                  <i data-lucide="upload" class="w-4 h-4"></i> Upload New QR Code Image
+                  <input type="file" id="adm-qr-file-input" onchange="app.uploadQrCode(this)" accept="image/*" class="hidden">
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab 9: WhatsApp & Support Settings -->
+        <div id="adm-tab-support" class="hidden space-y-6">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4 max-w-3xl">
+            <h3 class="text-base font-bold text-slate-900">WhatsApp & Student Support Settings</h3>
+            <form onsubmit="event.preventDefault(); app.saveSupportSettings();" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Official WhatsApp Number</label>
+                  <input type="text" id="adm-support-whatsapp" required placeholder="918431712924" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm font-mono">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Display Label</label>
+                  <input type="text" id="adm-support-label" required placeholder="Academic Project Support" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm">
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">General Enquiry WhatsApp Template</label>
+                <textarea id="adm-support-template-general" rows="2" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm"></textarea>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Project Enquiry Template</label>
+                <textarea id="adm-support-template-project" rows="2" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm"></textarea>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Payment Help Template</label>
+                <textarea id="adm-support-template-payment" rows="2" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm"></textarea>
+              </div>
+              <button type="submit" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all">
+                Save Support Settings
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= PROJECT DETAILS MODAL (9 COMPREHENSIVE TABS) ================= -->
+  <div id="modal-project-details" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Modal Header Banner -->
+      <div class="relative bg-gradient-to-r from-brand-navy via-slate-900 to-brand-navy text-white p-6 sm:p-8 flex-shrink-0">
+        <button onclick="app.closeProjectDetails()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <div class="flex flex-wrap items-center gap-2 mb-2">
+          <span id="modal-project-code" class="px-2.5 py-0.5 rounded-md font-mono text-xs font-black bg-cyan-400 text-slate-950">BTECH001</span>
+          <span id="modal-project-level" class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-purple-500/30 text-purple-200 border border-purple-400/30">B.Tech</span>
+          <span id="modal-project-domain" class="px-2.5 py-0.5 rounded-md text-xs font-medium text-slate-300">Artificial Intelligence</span>
+          <span id="modal-project-difficulty" class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700">INTERMEDIATE</span>
+          <span id="modal-project-timeline" class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-cyan-300 border border-slate-700">6-8 WEEKS</span>
+        </div>
+
+        <h3 id="modal-project-title" class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight leading-snug">
+          Project Title Placeholder
+        </h3>
+
+        <div class="flex flex-wrap items-center justify-between gap-4 mt-4 pt-4 border-t border-slate-800">
+          <div class="flex items-baseline gap-2">
+            <span class="text-xs text-slate-400">Academic Access:</span>
+            <span id="modal-project-price" class="text-2xl sm:text-3xl font-black text-cyan-400 font-mono">₹999</span>
+            <span id="modal-project-discount" class="text-xs line-through text-slate-500 font-mono">₹1,499</span>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button id="modal-enquire-btn" onclick="app.openProjectEnquiryFromModal()" class="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition-all flex items-center gap-1.5">
+              <i data-lucide="help-circle" class="w-4 h-4"></i> Enquire Now
+            </button>
+            <button id="modal-request-btn" onclick="app.openProjectRequestFromModal()" class="px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition-all flex items-center gap-1.5">
+              <i data-lucide="send" class="w-4 h-4"></i> Request Capstone
+            </button>
+            <a id="modal-whatsapp-enquiry-btn" href="https://wa.me/918431712924" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-md shadow-emerald-600/30 transition-all">
+              <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp
+            </a>
+            <button id="modal-buy-btn" onclick="app.openCheckoutFromModal()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-purple to-purple-600 hover:opacity-95 text-white text-xs sm:text-sm font-bold shadow-lg shadow-purple-500/25 transition-all flex items-center gap-2">
+              <i data-lucide="zap" class="w-4 h-4"></i> Buy Now (UPI)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Tabs Navigation (9 Tabs as Specified) -->
+      <div class="bg-slate-100 border-b border-slate-200 px-6 flex gap-4 overflow-x-auto text-xs sm:text-sm font-semibold flex-shrink-0">
+        <button onclick="app.setModalTab('overview')" id="tab-modal-overview" class="py-3.5 tab-active whitespace-nowrap">1. Overview</button>
+        <button onclick="app.setModalTab('tech')" id="tab-modal-tech" class="py-3.5 text-slate-600 hover:text-slate-900 whitespace-nowrap">2. Tech Stack</button>
+        <button onclick="app.setModalTab('features')" id="tab-modal-features" class="py-3.5 text-slate-600 hover:text-slate-900 whitespace-nowrap">3. Features & Modules</button>
+        <button onclick="app.setModalTab('architecture')" id="tab-modal-architecture" class="py-3.5 text-slate-600 hover:text-slate-900 whitespace-nowrap">4. Architecture & DFD/UML</button>
+        <button onclick="app.setModalTab('database')" id="tab-modal-database" class="py-3.5 text-slate-600 hover:text-slate-900 whitespace-nowrap">5. Database Design</button>
+        <button onclick="app.setModalTab('api')" id="tab-modal-api" class="py-3.5 text-slate-600 hover:text-slate-900 whitespace-nowrap">6. API Documentation</button>
+        <button onclick="app.setModalTab('roadmap')" id="tab-modal-roadmap" class="py-3.5 text-slate-600 hover:text-slate-900 whitespace-nowrap">7. Roadmap & Timeline</button>
+        <button onclick="app.setModalTab('prerequisites')" id="tab-modal-prerequisites" class="py-3.5 text-slate-600 hover:text-slate-900 whitespace-nowrap">8. Prerequisites & Outcomes</button>
+        <button onclick="app.setModalTab('deliverables')" id="tab-modal-deliverables" class="py-3.5 text-slate-600 hover:text-slate-900 whitespace-nowrap">9. Deliverables & Testing</button>
+      </div>
+
+      <!-- Modal Tab Contents (Scrollable) -->
+      <div class="p-6 sm:p-8 overflow-y-auto space-y-6 flex-grow text-slate-800 text-sm">
+        
+        <!-- Tab 1: Overview -->
+        <div id="modal-tab-overview" class="space-y-6">
+          <div class="rounded-2xl overflow-hidden border border-slate-200 aspect-video max-h-72 w-full bg-slate-900">
+            <img id="modal-project-img" src="" alt="Project Visual Artwork" class="w-full h-full object-cover">
+          </div>
+          <div class="space-y-4">
+            <div>
+              <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Project Description</h4>
+              <p id="modal-desc" class="text-slate-700 leading-relaxed mt-1 text-sm sm:text-base font-medium"></p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 rounded-xl bg-red-50/60 border border-red-200">
+                <h5 class="text-xs font-bold text-red-800 uppercase flex items-center gap-1.5"><i data-lucide="alert-circle" class="w-4 h-4"></i> Problem Statement</h5>
+                <p id="modal-problem" class="text-xs text-red-950 mt-1 leading-relaxed"></p>
+              </div>
+              <div class="p-4 rounded-xl bg-emerald-50/60 border border-emerald-200">
+                <h5 class="text-xs font-bold text-emerald-800 uppercase flex items-center gap-1.5"><i data-lucide="check-circle" class="w-4 h-4"></i> Proposed Solution</h5>
+                <p id="modal-solution" class="text-xs text-emerald-950 mt-1 leading-relaxed"></p>
+              </div>
+            </div>
+            <div class="space-y-2">
+              <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Core Objectives</h4>
+              <div id="modal-objectives" class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 whitespace-pre-line leading-relaxed font-mono"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h5 class="text-xs font-bold text-slate-500 uppercase">Real-World Applications</h5>
+                <p id="modal-apps" class="text-xs text-slate-700 mt-1"></p>
+              </div>
+              <div>
+                <h5 class="text-xs font-bold text-slate-500 uppercase">Target Users</h5>
+                <p id="modal-users" class="text-xs text-slate-700 mt-1"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Tech Stack -->
+        <div id="modal-tab-tech" class="hidden space-y-4">
+          <h4 class="text-base font-bold text-slate-900">Recommended Technology Stack</h4>
+          <p class="text-xs text-slate-500">Every library and framework selected is suited for this specific academic implementation without forced dependencies.</p>
+          <div id="modal-tech-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+        </div>
+
+        <!-- Tab 3: Features & Modules -->
+        <div id="modal-tab-features" class="hidden space-y-6">
+          <div>
+            <h4 class="text-base font-bold text-slate-900">Core Functional Modules</h4>
+            <div id="modal-modules-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3"></div>
+          </div>
+          <div>
+            <h4 class="text-base font-bold text-slate-900">Complete Feature Breakdown</h4>
+            <div id="modal-features-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3"></div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Architecture & DFD/UML -->
+        <div id="modal-tab-architecture" class="hidden space-y-5">
+          <div>
+            <h4 class="text-base font-bold text-slate-900">System Architecture Specification</h4>
+            <div id="modal-architecture-text" class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono text-slate-800 whitespace-pre-line leading-relaxed mt-2"></div>
+          </div>
+          <div>
+            <h4 class="text-base font-bold text-slate-900">Data Flow Diagrams (DFD Level 0 & Level 1)</h4>
+            <div id="modal-dfd-text" class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono text-slate-800 whitespace-pre-line leading-relaxed mt-2"></div>
+          </div>
+          <div>
+            <h4 class="text-base font-bold text-slate-900">UML Class & Sequence Diagram Specifications</h4>
+            <div id="modal-uml-text" class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono text-slate-800 whitespace-pre-line leading-relaxed mt-2"></div>
+          </div>
+        </div>
+
+        <!-- Tab 5: Database Design -->
+        <div id="modal-tab-database" class="hidden space-y-4">
+          <h4 class="text-base font-bold text-slate-900">Relational Database Design & Schema</h4>
+          <div id="modal-database-text" class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono text-slate-800 whitespace-pre-line leading-relaxed"></div>
+        </div>
+
+        <!-- Tab 6: API Documentation -->
+        <div id="modal-tab-api" class="hidden space-y-4">
+          <h4 class="text-base font-bold text-slate-900">REST API Specification & Endpoints</h4>
+          <div id="modal-api-text" class="p-4 rounded-xl bg-slate-900 text-cyan-300 font-mono text-xs rounded-xl overflow-x-auto whitespace-pre-line leading-relaxed"></div>
+        </div>
+
+        <!-- Tab 7: Roadmap & Timeline -->
+        <div id="modal-tab-roadmap" class="hidden space-y-4">
+          <h4 class="text-base font-bold text-slate-900">Estimated Development Roadmap & Sprints</h4>
+          <div id="modal-roadmap-text" class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 whitespace-pre-line leading-relaxed"></div>
+        </div>
+
+        <!-- Tab 8: Prerequisites & Outcomes -->
+        <div id="modal-tab-prerequisites" class="hidden space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-blue-50/60 border border-blue-200">
+              <h5 class="text-xs font-bold text-blue-900 uppercase">Prerequisites</h5>
+              <p id="modal-prereqs-text" class="text-xs text-blue-950 mt-1 leading-relaxed"></p>
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-50/60 border border-emerald-200">
+              <h5 class="text-xs font-bold text-emerald-900 uppercase">Learning Outcomes</h5>
+              <p id="modal-outcomes-text" class="text-xs text-emerald-950 mt-1 leading-relaxed"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 9: Deliverables & Testing -->
+        <div id="modal-tab-deliverables" class="hidden space-y-6">
+          <div>
+            <h4 class="text-base font-bold text-slate-900">Included Academic Deliverables (6 Artifacts)</h4>
+            <div id="modal-deliverables-list" class="space-y-3 mt-3"></div>
+          </div>
+          <div>
+            <h4 class="text-base font-bold text-slate-900">Testing & Verification Guidelines</h4>
+            <div id="modal-testing-text" class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 whitespace-pre-line leading-relaxed mt-2"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+    <!-- ================= DEDICATED PROJECT ENQUIRY MODAL ================= -->
+  <div id="modal-project-enquiry" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-4 my-auto animate-in fade-in zoom-in-95 duration-200">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <span class="text-xs font-bold text-amber-600 uppercase">Pre-Sales & Customization</span>
+          <h3 class="font-extrabold text-slate-900 text-xl mt-0.5">Enquire About This Project</h3>
+        </div>
+        <button onclick="app.closeProjectEnquiryModal()" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-3.5 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-950 space-y-1">
+        <span class="font-bold block" id="enq-modal-project-title">Selected Project</span>
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] text-amber-800 font-mono" id="enq-modal-project-code">CODE</span>
+          <span class="text-[11px] font-bold text-amber-900" id="enq-modal-project-price">₹799+</span>
+        </div>
+      </div>
+
+      <form onsubmit="event.preventDefault(); app.submitProjectEnquiry();" class="space-y-3">
+        <input type="hidden" id="enq-modal-project-id">
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name *</label>
+          <input type="text" id="enq-name" required placeholder="e.g. Rahul Sharma" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Email Address *</label>
+            <input type="email" id="enq-email" required placeholder="rahul@college.edu" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Mobile / WhatsApp *</label>
+            <input type="tel" id="enq-phone" required placeholder="9876543210" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">College / University</label>
+            <input type="text" id="enq-college" placeholder="e.g. Delhi Technical Univ" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Course / Branch</label>
+            <input type="text" id="enq-course" placeholder="e.g. B.Tech CSE / BCA" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Preferred Technology / Stack</label>
+          <input type="text" id="enq-tech" placeholder="e.g. Python Django, React + FastAPI, Java Spring" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Customization Requirements or Question *</label>
+          <textarea id="enq-message" rows="3" required placeholder="Describe what customization, synopsis assistance, or delivery timeline you need..." class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs"></textarea>
+        </div>
+
+        <button type="submit" id="enq-submit-btn" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2">
+          <i data-lucide="send" class="w-4 h-4"></i> Submit Enquiry for Immediate Response
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= STUDENT PROJECT ENROLLMENT REQUEST MODAL ================= -->
+  <div id="modal-project-request" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-4 my-auto animate-in fade-in zoom-in-95 duration-200">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <span class="text-xs font-bold text-brand-purple uppercase">Academic Enrollment</span>
+          <h3 class="font-extrabold text-slate-900 text-xl mt-0.5">Request Project Enrollment</h3>
+        </div>
+        <button onclick="app.closeProjectRequestModal()" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-3.5 bg-purple-50 rounded-xl border border-purple-200 text-xs text-purple-900">
+        <span class="font-bold block" id="req-modal-project-title">Selected Project</span>
+        <span class="text-[11px] text-purple-700 font-mono" id="req-modal-project-code">CODE</span>
+      </div>
+
+      <form onsubmit="event.preventDefault(); app.submitProjectEnrollmentRequest();" class="space-y-3.5">
+        <input type="hidden" id="req-modal-project-id">
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Project Mode</label>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="p-2.5 rounded-xl border border-slate-300 text-xs font-semibold flex items-center gap-2 cursor-pointer hover:bg-slate-50">
+              <input type="radio" name="req-mode" value="Individual" checked onchange="app.toggleTeamFields(false)"> Individual Project
+            </label>
+            <label class="p-2.5 rounded-xl border border-slate-300 text-xs font-semibold flex items-center gap-2 cursor-pointer hover:bg-slate-50">
+              <input type="radio" name="req-mode" value="Team" onchange="app.toggleTeamFields(true)"> Team Project
+            </label>
+          </div>
+        </div>
+
+        <div id="req-team-members-container" class="hidden">
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Team Member Names & Roll Numbers</label>
+          <input type="text" id="req-team-members" placeholder="e.g. Aditya Sharma (Roll 42), Priya Nair (Roll 45)" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Specialization or Department Remarks</label>
+          <textarea id="req-remarks" rows="2" placeholder="e.g. Semester 8 major project, faculty guidelines require IEEE format..." class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs"></textarea>
+        </div>
+
+        <button type="submit" id="req-submit-btn" class="w-full py-3 bg-brand-purple hover:bg-purple-700 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all">
+          Submit Enrollment Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= CHECKOUT / UPI PAYMENT MODAL ================= -->
+  <div id="modal-checkout" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-4 my-auto animate-in fade-in zoom-in-95 duration-200">
+      
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <span class="text-xs font-bold text-brand-purple uppercase">Direct UPI Checkout</span>
+          <h3 class="font-extrabold text-slate-900 text-xl mt-0.5">Complete Project Purchase</h3>
+        </div>
+        <button onclick="app.closeCheckout()" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Project Summary Pill -->
+      <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex items-center justify-between text-xs">
+        <div>
+          <span class="font-mono font-bold text-cyan-600" id="checkout-project-code">CODE</span>
+          <h5 class="font-bold text-slate-900 text-xs sm:text-sm line-clamp-1" id="checkout-project-title">Title</h5>
+        </div>
+        <span class="font-black text-slate-900 text-base font-mono" id="checkout-amount">₹999</span>
+      </div>
+
+      <!-- Official QR Code & Payee -->
+      <div class="p-4 bg-slate-900 rounded-2xl text-center space-y-3">
+        <div class="w-48 h-48 bg-white p-2 rounded-2xl mx-auto shadow-md">
+          <img id="checkout-qr-img" src="/static/uploads/qr/projectverse-upi-qr.png" alt="Official UPI QR Code" class="w-full h-full object-contain">
+        </div>
+        <div class="flex items-center justify-center gap-2">
+          <a id="checkout-download-qr" href="/static/uploads/qr/projectverse-upi-qr.png" download="projectverse-upi-qr.png" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-medium border border-slate-700 flex items-center gap-1">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i> Download QR
+          </a>
+          <a id="checkout-upi-intent-btn" href="upi://pay?pa=8431712924-3@ybl&pn=ANIL&cu=INR" class="px-4 py-1.5 rounded-lg bg-cyan-400 hover:bg-cyan-300 text-slate-950 text-xs font-bold flex items-center gap-1">
+            <i data-lucide="smartphone" class="w-3.5 h-3.5"></i> Pay via UPI App
+          </a>
+        </div>
+        <div class="space-y-0.5 text-xs text-slate-300">
+          <p class="font-bold text-white text-sm" id="checkout-account-name">ANIL</p>
+          <div class="inline-flex items-center gap-2 bg-slate-800 px-3 py-1 rounded-full text-cyan-300 font-mono text-xs border border-slate-700">
+            <span id="checkout-upi-id">8431712924-3@ybl</span>
+            <button type="button" onclick="app.copyUpiId()" class="hover:text-white" title="Copy"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
+          </div>
+          <p class="text-[11px] text-slate-400 pt-0.5" id="checkout-upi-phone">UPI Mobile: +91 8431712924</p>
+        </div>
+      </div>
+
+      <!-- Payment Submission Form -->
+      <form onsubmit="event.preventDefault(); app.submitPayment();" class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">12-Digit Transaction Reference (UTR) *</label>
+          <input type="text" id="checkout-utr" required placeholder="e.g. 492817293810" maxlength="20" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm font-mono">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Payment Screenshot (Optional)</label>
+          <input type="file" id="checkout-screenshot" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-purple-100 file:text-purple-700">
+        </div>
+        <button type="submit" id="checkout-submit-btn" class="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-95 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2">
+          <i data-lucide="shield-check" class="w-4 h-4"></i> Submit for Instant Verification
+        </button>
+        <a id="checkout-whatsapp-btn" href="https://wa.me/918431712924" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-xl border border-emerald-500/40 bg-emerald-50 text-emerald-800 text-xs font-bold flex items-center justify-center gap-2">
+          <i data-lucide="message-circle" class="w-4 h-4 text-emerald-600"></i> Need Payment Help? WhatsApp Support
+        </a>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= AUTH MODALS (LOGIN & EXTENDED REGISTRATION) ================= -->
+  <div id="modal-auth" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-4 my-auto animate-in fade-in zoom-in-95 duration-200">
+      
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 id="auth-modal-title" class="font-extrabold text-slate-900 text-xl">Sign In</h3>
+        <button onclick="app.closeAuthModal()" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Segmented Auth Tab Switcher -->
+      <div class="flex rounded-xl bg-slate-100 p-1 text-xs font-semibold">
+        <button type="button" id="auth-tab-login" onclick="app.switchAuthMode('login')" class="flex-1 py-2 rounded-lg transition-all text-center font-bold bg-white text-slate-900 shadow-sm">
+          Sign In
+        </button>
+        <button type="button" id="auth-tab-register" onclick="app.switchAuthMode('register')" class="flex-1 py-2 rounded-lg transition-all text-center font-medium text-slate-500 hover:text-slate-800">
+          Student Registration
+        </button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <form id="auth-login-form" onsubmit="event.preventDefault(); app.handleLogin();" class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Email Address</label>
+          <input type="email" id="login-email" required placeholder="student@projectverse.com" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Password</label>
+          <input type="password" id="login-password" required placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm">
+        </div>
+        <button type="submit" class="w-full py-3 bg-brand-purple hover:bg-purple-700 text-white font-bold rounded-xl text-sm shadow-md transition-all">
+          Sign In
+        </button>
+        <p class="text-xs text-center text-slate-600">
+          New student? <a href="#" onclick="app.switchAuthMode('register')" class="text-brand-purple font-semibold hover:underline">Register your profile</a>
+        </p>
+      </form>
+
+      <!-- EXTENDED REGISTRATION FORM (Full Fields as Specified) -->
+      <form id="auth-register-form" onsubmit="event.preventDefault(); app.handleRegister();" class="hidden space-y-3 max-h-[70vh] overflow-y-auto pr-1">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name *</label>
+          <input type="text" id="reg-name" required placeholder="Aditya Sharma" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Email *</label>
+            <input type="email" id="reg-email" required placeholder="student@college.edu" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Mobile *</label>
+            <input type="tel" id="reg-mobile" required placeholder="9876543210" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">College Name *</label>
+            <input type="text" id="reg-college" required placeholder="e.g. Apex Institute of Tech" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">University *</label>
+            <input type="text" id="reg-university" required placeholder="e.g. State Technical Univ" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Academic Course *</label>
+            <select id="reg-course" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm bg-white">
+              <option value="B.Tech">B.Tech (Engineering)</option>
+              <option value="BCA">BCA (Computer Applications)</option>
+              <option value="B.Com">B.Com (Commerce & Analytics)</option>
+              <option value="MCA">MCA (Master of Computer Apps)</option>
+              <option value="M.Tech">M.Tech (Postgraduate Research)</option>
+              <option value="IIT-Level / Research-Grade">IIT-Level / Research-Grade</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Year / Semester *</label>
+            <select id="reg-year" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm bg-white">
+              <option value="Final Year">Final Year</option>
+              <option value="Semester 8">Semester 8</option>
+              <option value="Semester 7">Semester 7</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="2nd Year">2nd Year</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Specialization</label>
+            <input type="text" id="reg-specialization" placeholder="e.g. AI/ML, Cloud, Finance" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Preferred Technology</label>
+            <input type="text" id="reg-tech" placeholder="e.g. Python, React, Power BI" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Project Mode</label>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="p-2 rounded-xl border border-slate-300 text-xs font-medium flex items-center gap-2 cursor-pointer bg-white">
+              <input type="radio" name="reg-mode" value="Individual" checked> Individual Project
+            </label>
+            <label class="p-2 rounded-xl border border-slate-300 text-xs font-medium flex items-center gap-2 cursor-pointer bg-white">
+              <input type="radio" name="reg-mode" value="Team"> Team Project
+            </label>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Create Password *</label>
+          <input type="password" id="reg-password" required minlength="6" placeholder="At least 6 characters" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm">
+        </div>
+        <button type="submit" class="w-full py-3 bg-brand-purple hover:bg-purple-700 text-white font-bold rounded-xl text-sm shadow-md transition-all">
+          Complete Registration & Proceed
+        </button>
+        <p class="text-xs text-center text-slate-600">
+          Already registered? <a href="#" onclick="app.switchAuthMode('login')" class="text-brand-purple font-semibold hover:underline">Sign in</a>
+        </p>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ================= ADMIN ADD/EDIT PROJECT MODAL ================= -->
+  <div id="modal-admin-project" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-4 my-auto max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 id="adm-project-modal-title" class="font-extrabold text-slate-900 text-lg">Add New Project</h3>
+        <button onclick="app.closeAdminProjectModal()" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form onsubmit="event.preventDefault(); app.handleSaveAdminProject();" class="space-y-3">
+        <input type="hidden" id="adm-p-id">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Project Code *</label>
+            <input type="text" id="adm-p-code" required placeholder="BTECH026" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-mono">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Academic Stream *</label>
+            <select id="adm-p-level" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white">
+              <option value="B.Tech">B.Tech</option>
+              <option value="BCA">BCA</option>
+              <option value="B.Com">B.Com</option>
+              <option value="MCA">MCA</option>
+              <option value="M.Tech">M.Tech</option>
+              <option value="IIT-Level / Research-Grade">IIT-Level / Research-Grade</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Project Title *</label>
+          <input type="text" id="adm-p-title" required placeholder="e.g. Distributed Neural Architecture Search Platform" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Domain *</label>
+            <input type="text" id="adm-p-domain" required placeholder="e.g. Artificial Intelligence" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Difficulty *</label>
+            <select id="adm-p-diff" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white">
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+              <option value="Research">Research</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Price (₹ min 799) *</label>
+            <input type="number" id="adm-p-price" required min="799" value="999" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs font-mono">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Tech Stack Summary *</label>
+          <input type="text" id="adm-p-tech" required placeholder="e.g. React.js, Python FastAPI, PyTorch, PostgreSQL" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Short Description *</label>
+          <textarea id="adm-p-desc" rows="3" required placeholder="Brief project summary..." class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-brand-purple hover:bg-purple-700 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all">
+          Save Project to Catalogue
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= ADMIN CSV IMPORT MODAL ================= -->
+  <div id="modal-admin-csv" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-4 my-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 class="font-extrabold text-slate-900 text-lg">Bulk Import Projects (CSV)</h3>
+        <button onclick="app.closeAdminCsvModal()" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <p class="text-xs text-slate-600">Upload a CSV file containing columns: Project Code, Title, Academic Level, Domain, Difficulty, Price (INR), Tech Stack, Description.</p>
+      <form onsubmit="event.preventDefault(); app.handleCsvImport();" class="space-y-4">
+        <input type="file" id="adm-csv-input" accept=".csv" required class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-purple-100 file:text-purple-700">
+        <button type="submit" id="adm-csv-submit-btn" class="w-full py-3 bg-brand-navy hover:bg-slate-800 text-white font-bold rounded-xl text-xs shadow-md transition-all">
+          Upload & Import Projects
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= TOAST NOTIFICATION ================= -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 max-w-sm w-full bg-slate-900 text-white p-4 rounded-2xl shadow-2xl border border-slate-700 flex items-center gap-3">
+    <div id="toast-icon" class="text-emerald-400 flex-shrink-0">
+      <i data-lucide="check-circle" class="w-5 h-5"></i>
+    </div>
+    <div class="flex-grow">
+      <h5 id="toast-title" class="font-bold text-xs uppercase tracking-wide text-slate-300">Notice</h5>
+      <p id="toast-message" class="text-xs text-slate-200 mt-0.5">Notification content</p>
+    </div>
+  </div>
+
+  <!-- ================= RICH FOOTER ================= -->
+  <footer class="bg-brand-navy text-slate-400 text-xs py-14 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+        
+        <!-- Col 1: Brand Info -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-purple to-cyan-500 flex items-center justify-center text-white font-bold text-lg">
+              PV
+            </div>
+            <span class="text-xl font-extrabold tracking-tight text-white">PROJECT<span class="text-cyan-400">VERSE</span></span>
+          </div>
+          <p class="text-slate-400 leading-relaxed text-xs">
+            PROJECTVERSE is a premium academic project marketplace providing verified source code, architecture specifications, and deliverables across 90 curated projects in BCA, B.Com, B.Tech, MCA, M.Tech, and advanced research domains.
+          </p>
+          <p class="font-mono text-cyan-400 text-[11px]">Ideas Into Innovation.</p>
+        </div>
+
+        <!-- Col 2: Categories -->
+        <div class="space-y-2.5">
+          <h4 class="font-bold text-white text-sm uppercase tracking-wider">Undergraduate Streams</h4>
+          <ul class="space-y-1.5 text-xs">
+            <li><button onclick="app.filterByLevel('BCA')" class="hover:text-white transition-colors">BCA Projects (15)</button></li>
+            <li><button onclick="app.filterByLevel('B.Com')" class="hover:text-white transition-colors">B.Com Financial Analytics (10)</button></li>
+            <li><button onclick="app.filterByLevel('B.Tech')" class="hover:text-white transition-colors">B.Tech Engineering & AI (25)</button></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Postgraduate & Research -->
+        <div class="space-y-2.5">
+          <h4 class="font-bold text-white text-sm uppercase tracking-wider">Postgraduate & Research</h4>
+          <ul class="space-y-1.5 text-xs">
+            <li><button onclick="app.filterByLevel('MCA')" class="hover:text-white transition-colors">MCA Enterprise & Agentic AI (15)</button></li>
+            <li><button onclick="app.filterByLevel('M.Tech')" class="hover:text-white transition-colors">M.Tech Deep Learning & Edge AI (15)</button></li>
+            <li><button onclick="app.filterByLevel('IIT-Level / Research-Grade')" class="hover:text-white transition-colors">IIT-Level / Research-Grade Ideas (10)</button></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Quick Links & Contact -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-white text-sm uppercase tracking-wider">Academic Support</h4>
+          <p class="text-xs text-slate-400">Questions about syllabus alignment or faculty submission requirements?</p>
+          <div class="space-y-1 text-xs">
+            <p><span class="text-slate-300 font-semibold">Email:</span> support@projectverse.com</p>
+            <p><span class="text-slate-300 font-semibold">WhatsApp Support:</span> <a href="https://wa.me/918431712924" target="_blank" class="text-emerald-400 hover:underline font-mono">+91 8431712924</a></p>
+            <p><span class="text-slate-300 font-semibold">Official UPI ID:</span> <span class="font-mono text-cyan-300">8431712924-3@ybl (ANIL)</span></p>
+            <p><span class="text-slate-300 font-semibold">Catalogue:</span> Exactly 90 Projects</p>
+            <p><span class="text-slate-300 font-semibold">Pricing:</span> Starting at ₹799</p>
+          </div>
+          <div class="pt-2 flex flex-wrap items-center gap-2">
+            <button onclick="app.openAuthModal('login')" class="text-xs text-cyan-400 hover:underline font-semibold">
+              Staff & Student Login →
+            </button>
+            <span class="text-slate-600">|</span>
+            <button onclick="app.openAuthModal('register')" class="text-xs text-purple-400 hover:underline font-semibold">
+              New Student Registration →
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Disclaimer -->
+      <div class="mt-12 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-[11px]">
+        <p>© 2026 PROJECTVERSE. All Rights Reserved. Designed for BCA, B.Com, B.Tech, MCA & M.Tech Students.</p>
+        <p class="font-mono">PROJECTVERSE • 90 Projects • Verified UPI Verification • Payee: ANIL</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= PERMANENT FLOATING WHATSAPP BUTTON ================= -->
+  <div class="fixed bottom-6 right-6 z-50 flex items-center group">
+    <a href="https://wa.me/918431712924?text=Hello%20PROJECTVERSE%2C%20I%20am%20interested%20in%20an%20academic%20project%20and%20need%20assistance."
+       target="_blank" rel="noopener noreferrer"
+       id="floating-whatsapp-btn"
+       class="relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-slate-950 shadow-2xl hover:scale-110 transition-all duration-300 cursor-pointer"
+       title="Chat with us on WhatsApp (+91 8431712924)">
+      <span class="absolute -top-1 -right-1 flex h-4 w-4">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-500"></span>
+      </span>
+      <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    </a>
+    <div class="hidden md:block absolute right-16 bg-slate-900 text-white text-xs font-semibold py-1.5 px-3 rounded-lg shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+      Chat on WhatsApp (+91 8431712924)
+    </div>
+  </div>
+
+  <!-- Application Controller Script -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  projectverse-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: projectverse_core
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - NOTIFICATION_EMAIL=aniladani843@gmail.com
+      - WHATSAPP_NUMBER=918431712924
+      - UPI_ID=8431712924-3@ybl
+      - UPI_PAYEE_NAME=ANIL
+      - DB_PATH=/app/projectverse.db
+    volumes:
+      - ./projectverse.db:/app/projectverse.db
+      - ./static/uploads:/app/static/uploads
+      - ./backups:/app/backups
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

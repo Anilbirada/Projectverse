@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# SQLite temporary buffers
+*.db-wal
+*.db-shm
+
+# Environment secrets
+.env
+
+# Backups
+backups/
+projectverse_backup_*.db
+*.bak
+
+# IDE & OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
