@@ -29,6 +29,7 @@ from pydantic import BaseModel, EmailStr
 
 # Load email notification service
 import email_service
+import referral_routes
 
 DB_PATH = os.getenv("PROJECTVERSE_DB", "projectverse.db")
 SECRET_KEY = os.getenv("SECRET_KEY", "projectverse_prod_key_2026")
@@ -43,6 +44,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Mount Referral & Affiliate Management Router
+app.include_router(referral_routes.router)
 
 # SQLite Connection Factory with WAL mode and 30s busy timeout for high concurrency
 def get_db():
@@ -622,6 +626,7 @@ class RegisterRequest(BaseModel):
     specialization: Optional[str] = ""
     preferred_tech: Optional[str] = ""
     team_mode: Optional[str] = "Individual"
+    referral_code: Optional[str] = ""
 
 @app.post("/api/auth/register")
 def register_customer(payload: RegisterRequest, request: Request):
@@ -669,6 +674,55 @@ def register_customer(payload: RegisterRequest, request: Request):
         payload.preferred_tech.strip() if payload.preferred_tech else "",
         payload.team_mode or "Individual"
     ))
+
+    # --- Referral Tracking & Attribution ---
+    ref_code_input = (payload.referral_code or "").strip().upper()
+    if ref_code_input:
+        cur.execute("""
+        SELECT rc.code, rp.id as partner_id, rp.email as partner_email, rp.mobile as partner_mobile,
+               rp.full_name as partner_name, rp.status
+        FROM referral_codes rc
+        JOIN referral_partners rp ON rc.partner_id = rp.id
+        WHERE rc.code = ? AND rc.is_active = 1
+        """, (ref_code_input,))
+        ref_row = cur.fetchone()
+        if ref_row and ref_row["status"] == "APPROVED":
+            # Anti-fraud self-referral prevention: partner cannot refer themselves
+            if (ref_row["partner_email"].lower() == payload.email.lower().strip() or
+                ref_row["partner_mobile"].strip() == payload.mobile.strip()):
+                conn.close()
+                raise HTTPException(status_code=400, detail="Self-referrals are not permitted. Referral partners cannot use their own referral code.")
+
+            cur.execute("SELECT setting_value FROM referral_settings WHERE setting_key = 'attribution_window_days'")
+            win_row = cur.fetchone()
+            win_days = int(win_row[0]) if win_row else 30
+
+            client_ip = request.client.host if request.client else "127.0.0.1"
+            cur.execute("""
+            INSERT INTO referral_attributions (
+                partner_id, referral_code, student_user_id, student_email, student_mobile, ip_address,
+                attribution_date, expires_at
+            ) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, datetime('now', ?))
+            """, (
+                ref_row["partner_id"],
+                ref_code_input,
+                user_id,
+                payload.email.lower().strip(),
+                payload.mobile.strip(),
+                client_ip,
+                f"+{win_days} days"
+            ))
+
+            cur.execute("""
+            UPDATE referral_partners
+            SET total_registrations = total_registrations + 1, updated_at = CURRENT_TIMESTAMP
+            WHERE id = ?
+            """, (ref_row["partner_id"],))
+
+            email_service.notify_partner_new_referred_student(
+                {"full_name": ref_row["partner_name"], "email": ref_row["partner_email"]},
+                {"full_name": payload.full_name, "college": payload.college, "course": payload.course}
+            )
 
     conn.commit()
     conn.close()
@@ -977,6 +1031,29 @@ async def create_order_with_payment(
     VALUES (?, ?, ?, ?, ?, ?, ?, 'PAYMENT_PENDING', 'UPI')
     """, (order_num, user["id"], user["full_name"], user["email"], user.get("mobile", ""), proj["id"], proj["price"]))
     order_id = cur.lastrowid
+
+    # Check and link active referral attribution
+    cur.execute("""
+    SELECT id, partner_id, referral_code FROM referral_attributions
+    WHERE student_user_id = ? AND is_active = 1 AND (expires_at IS NULL OR expires_at >= CURRENT_TIMESTAMP)
+    ORDER BY id DESC LIMIT 1
+    """, (user["id"],))
+    attr_row = cur.fetchone()
+    if attr_row:
+        cur.execute("""
+        INSERT INTO referral_conversions (
+            partner_id, referral_code, attribution_id, order_id, order_number, user_id, project_id, order_amount
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            attr_row["partner_id"],
+            attr_row["referral_code"],
+            attr_row["id"],
+            order_id,
+            order_num,
+            user["id"],
+            proj["id"],
+            proj["price"]
+        ))
 
     cur.execute("""
     INSERT INTO payments (order_id, user_id, project_id, amount, utr_reference, screenshot_path, status)
@@ -1723,15 +1800,88 @@ def verify_payment_submission(payment_id: int, payload: PaymentVerificationPaylo
 
     log_audit(user["id"], user["email"], "verify_payment", "payments", str(payment_id), f"Payment {payload.action} (Order #{pay['order_id']})")
 
-    if payload.action == "approved":
+    if action == "approved":
         # Fetch order details for notification
         conn = get_db()
         cur = conn.cursor()
-        cur.execute("SELECT order_number, customer_name, customer_email, project_id FROM orders WHERE id = ?", (pay["order_id"],))
+        cur.execute("SELECT order_number, customer_name, customer_email, project_id, amount FROM orders WHERE id = ?", (pay["order_id"],))
         ord_info = cur.fetchone()
-        cur.execute("SELECT project_code FROM projects WHERE id = ?", (pay["project_id"],))
-        proj_code = cur.fetchone()["project_code"]
+        cur.execute("SELECT project_code, title FROM projects WHERE id = ?", (pay["project_id"],))
+        proj_row = cur.fetchone()
+        proj_code = proj_row["project_code"] if proj_row else "PV-PROJ"
+        proj_title = proj_row["title"] if proj_row else "Academic Project"
+
+        # Check and compute automatic 25% referral commission
+        cur.execute("SELECT * FROM referral_conversions WHERE order_id = ?", (pay["order_id"],))
+        conv_row = cur.fetchone()
+        if conv_row:
+            # Check if commission already recorded (prevent duplicate commission)
+            cur.execute("SELECT id FROM referral_commissions WHERE order_id = ?", (pay["order_id"],))
+            if not cur.fetchone():
+                cur.execute("SELECT setting_value FROM referral_settings WHERE setting_key = 'commission_rate_percentage'")
+                rate_row = cur.fetchone()
+                rate_pct = float(rate_row[0]) if rate_row else 25.0
+                rate_decimal = rate_pct / 100.0
+
+                net_order_amount = float(conv_row["order_amount"])
+                comm_amount = round(net_order_amount * rate_decimal, 2)
+
+                cur.execute("""
+                INSERT INTO referral_commissions (
+                    partner_id, conversion_id, order_id, order_number, order_amount,
+                    commission_rate, commission_amount, status, approved_by, approved_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, 'APPROVED', ?, CURRENT_TIMESTAMP)
+                """, (
+                    conv_row["partner_id"],
+                    conv_row["id"],
+                    pay["order_id"],
+                    conv_row["order_number"],
+                    net_order_amount,
+                    rate_decimal,
+                    comm_amount,
+                    user["full_name"]
+                ))
+
+                cur.execute("""
+                UPDATE referral_partners
+                SET total_sales = total_sales + 1,
+                    total_commission_earned = total_commission_earned + ?,
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE id = ?
+                """, (comm_amount, conv_row["partner_id"]))
+
+                # Fetch partner info for notifications
+                cur.execute("SELECT full_name, email FROM referral_partners WHERE id = ?", (conv_row["partner_id"],))
+                p_row = cur.fetchone()
+                if p_row:
+                    partner_notif = {
+                        "partner_name": p_row["full_name"],
+                        "partner_email": p_row["email"],
+                        "order_number": conv_row["order_number"],
+                        "project_title": proj_title,
+                        "order_amount": net_order_amount,
+                        "commission_amount": comm_amount
+                    }
+
+        conn.commit()
         conn.close()
+
+        if partner_notif:
+            email_service.notify_partner_commission_earned(
+                {"full_name": partner_notif["partner_name"], "email": partner_notif["partner_email"]},
+                {
+                    "order_number": partner_notif["order_number"],
+                    "project_title": partner_notif["project_title"],
+                    "order_amount": partner_notif["order_amount"],
+                    "commission_amount": partner_notif["commission_amount"]
+                }
+            )
+            create_admin_notification(
+                "commission",
+                f"25% Commission Earned: Rs {partner_notif['commission_amount']:,}",
+                f"Partner {partner_notif['partner_name']} earned Rs {partner_notif['commission_amount']:,} (25%) on Order {partner_notif['order_number']}.",
+                "/#admin"
+            )
 
         email_service.notify_payment_verified({
             "order_number": ord_info["order_number"],
@@ -1740,8 +1890,42 @@ def verify_payment_submission(payment_id: int, payload: PaymentVerificationPaylo
             "amount": pay["amount"],
             "project_code": proj_code
         })
+    elif action == "rejected":
+        # Handle commission reversal if payment was rejected/cancelled
+        reversal_notif = None
+        conn = get_db()
+        cur = conn.cursor()
+        cur.execute("SELECT id, partner_id, commission_amount, order_number, status FROM referral_commissions WHERE order_id = ?", (pay["order_id"],))
+        comm_row = cur.fetchone()
+        if comm_row and comm_row["status"] in ["APPROVED", "PENDING"]:
+            cur.execute("UPDATE referral_commissions SET status = 'REVERSED', updated_at = CURRENT_TIMESTAMP WHERE id = ?", (comm_row["id"],))
+            cur.execute("""
+            UPDATE referral_partners
+            SET total_commission_earned = MAX(0, total_commission_earned - ?),
+                total_sales = MAX(0, total_sales - 1),
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = ?
+            """, (comm_row["commission_amount"], comm_row["partner_id"]))
 
-    return {"success": True, "message": f"Payment successfully {payload.action}."}
+            cur.execute("SELECT full_name, email FROM referral_partners WHERE id = ?", (comm_row["partner_id"],))
+            p_row = cur.fetchone()
+            if p_row:
+                reversal_notif = {
+                    "full_name": p_row["full_name"],
+                    "email": p_row["email"],
+                    "order_number": comm_row["order_number"],
+                    "commission_amount": comm_row["commission_amount"]
+                }
+        conn.commit()
+        conn.close()
+
+        if reversal_notif:
+            email_service.notify_partner_commission_reversed(
+                {"full_name": reversal_notif["full_name"], "email": reversal_notif["email"]},
+                {"order_number": reversal_notif["order_number"], "commission_amount": reversal_notif["commission_amount"]}
+            )
+
+    return {"success": True, "message": f"Payment successfully {action}."}
 
 # --- Admin Projects CRUD (All 90 Projects) ---
 class ProjectCreatePayload(BaseModel):
