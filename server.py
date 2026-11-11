@@ -1801,6 +1801,7 @@ def verify_payment_submission(payment_id: int, payload: PaymentVerificationPaylo
     log_audit(user["id"], user["email"], "verify_payment", "payments", str(payment_id), f"Payment {payload.action} (Order #{pay['order_id']})")
 
     if action == "approved":
+        partner_notif = None
         # Fetch order details for notification
         conn = get_db()
         cur = conn.cursor()
