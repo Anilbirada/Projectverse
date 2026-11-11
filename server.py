@@ -234,12 +234,7 @@ def get_payment_settings():
     row = cur.fetchone()
     conn.close()
     if row:
-        res = dict(row)
-        res["upi_mobile"] = "8431712924"
-        res["upi_id"] = "8431712924-3@ybl"
-        res["account_name"] = "ANIL"
-        res["qr_code_path"] = "/static/uploads/qr/projectverse-upi-qr.png"
-        return res
+        return dict(row)
     return {
         "upi_mobile": "8431712924",
         "upi_id": "8431712924-3@ybl",
@@ -249,11 +244,95 @@ def get_payment_settings():
         "support_phone": "+91 8431712924"
     }
 
+class PaymentSettingsPayload(BaseModel):
+    upi_mobile: Optional[str] = "8431712924"
+    upi_id: Optional[str] = "8431712924-3@ybl"
+    account_name: Optional[str] = "ANIL"
+    instructions: Optional[str] = ""
+
+@app.post("/api/admin/payment-settings")
+def update_payment_settings(payload: PaymentSettingsPayload, request: Request):
+    user = require_admin(request)
+    conn = get_db()
+    cur = conn.cursor()
+
+    cur.execute("SELECT id FROM payment_settings WHERE id = 1")
+    if cur.fetchone():
+        cur.execute("""
+        UPDATE payment_settings
+        SET upi_mobile = ?, upi_id = ?, account_name = ?, instructions = ?, updated_at = CURRENT_TIMESTAMP
+        WHERE id = 1
+        """, (payload.upi_mobile or "", payload.upi_id or "", payload.account_name or "", payload.instructions or ""))
+    else:
+        cur.execute("""
+        INSERT INTO payment_settings (id, upi_mobile, upi_id, account_name, instructions, qr_code_path, support_phone)
+        VALUES (1, ?, ?, ?, ?, '/static/uploads/qr/projectverse-upi-qr.png', '+91 8431712924')
+        """, (payload.upi_mobile or "", payload.upi_id or "", payload.account_name or "", payload.instructions or ""))
+
+    # Sync into admin_settings table as well
+    cur.execute("UPDATE admin_settings SET setting_value = ? WHERE setting_key = 'upi_id'", (payload.upi_id or "",))
+    cur.execute("UPDATE admin_settings SET setting_value = ? WHERE setting_key = 'upi_name'", (payload.account_name or "",))
+    cur.execute("UPDATE admin_settings SET setting_value = ? WHERE setting_key = 'business_phone'", (payload.upi_mobile or "",))
+
+    conn.commit()
+    conn.close()
+
+    log_audit(user["id"], user["email"], "update_payment_settings", "payment_settings", "1", f"Updated UPI ID to {payload.upi_id} ({payload.account_name})")
+
+    return {
+        "success": True,
+        "message": "Payment settings updated successfully.",
+        "settings": {
+            "upi_mobile": payload.upi_mobile,
+            "upi_id": payload.upi_id,
+            "account_name": payload.account_name,
+            "instructions": payload.instructions
+        }
+    }
+
+@app.post("/api/admin/payment-settings/qr")
+async def upload_payment_qr(request: Request, qr_file: UploadFile = File(...)):
+    user = require_admin(request)
+
+    qr_dir = os.path.join("static", "uploads", "qr")
+    os.makedirs(qr_dir, exist_ok=True)
+
+    file_ext = os.path.splitext(qr_file.filename or "")[1] or ".png"
+    file_name = f"official_qr_{int(datetime.now().timestamp())}{file_ext}"
+    dest_path = os.path.join(qr_dir, file_name)
+
+    content = await qr_file.read()
+    with open(dest_path, "wb") as f:
+        f.write(content)
+
+    qr_rel_path = f"/static/uploads/qr/{file_name}"
+
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("UPDATE payment_settings SET qr_code_path = ?, updated_at = CURRENT_TIMESTAMP WHERE id = 1", (qr_rel_path,))
+    conn.commit()
+    conn.close()
+
+    log_audit(user["id"], user["email"], "upload_qr", "payment_settings", "1", f"Uploaded QR code {qr_rel_path}")
+
+    return {
+        "success": True,
+        "message": "QR Code updated successfully.",
+        "qr_code_path": qr_rel_path
+    }
+
 @app.get("/api/support-settings")
 def get_support_settings():
     conn = get_db()
     cur = conn.cursor()
-    cur.execute("SELECT whatsapp_number, support_label, template_general, template_project, template_payment FROM support_settings WHERE id = 1")
+    cur.execute("""
+    SELECT whatsapp_number, 
+           whatsapp_display as support_label, 
+           general_message as template_general, 
+           project_message as template_project, 
+           payment_message as template_payment 
+    FROM support_settings WHERE id = 1
+    """)
     row = cur.fetchone()
     conn.close()
     if row:
@@ -264,6 +343,45 @@ def get_support_settings():
         "template_general": "Hello PROJECTVERSE, I am interested in your college project services. Please provide more information.",
         "template_project": "Hello PROJECTVERSE, I need information about project {code}: {title}.",
         "template_payment": "Hello PROJECTVERSE, I need assistance with payment for project {code}: {title}."
+    }
+
+class SupportSettingsPayload(BaseModel):
+    whatsapp_number: Optional[str] = "918431712924"
+    support_label: Optional[str] = "Official Academic Support"
+    template_general: Optional[str] = ""
+    template_project: Optional[str] = ""
+    template_payment: Optional[str] = ""
+
+@app.post("/api/admin/support-settings")
+def update_support_settings(payload: SupportSettingsPayload, request: Request):
+    user = require_admin(request)
+    conn = get_db()
+    cur = conn.cursor()
+
+    cur.execute("SELECT id FROM support_settings WHERE id = 1")
+    if cur.fetchone():
+        cur.execute("""
+        UPDATE support_settings
+        SET whatsapp_number = ?, whatsapp_display = ?, general_message = ?, project_message = ?, payment_message = ?, updated_at = CURRENT_TIMESTAMP
+        WHERE id = 1
+        """, (payload.whatsapp_number or "", payload.support_label or "", payload.template_general or "", payload.template_project or "", payload.template_payment or ""))
+    else:
+        cur.execute("""
+        INSERT INTO support_settings (id, whatsapp_number, whatsapp_display, support_email, support_hours, general_message, project_message, payment_message)
+        VALUES (1, ?, ?, 'support@projectverse.com', '24/7 Academic Support Available', ?, ?, ?)
+        """, (payload.whatsapp_number or "", payload.support_label or "", payload.template_general or "", payload.template_project or "", payload.template_payment or ""))
+
+    # Sync into admin_settings
+    cur.execute("UPDATE admin_settings SET setting_value = ? WHERE setting_key = 'whatsapp_number'", (payload.whatsapp_number or "",))
+
+    conn.commit()
+    conn.close()
+
+    log_audit(user["id"], user["email"], "update_support_settings", "support_settings", "1", f"Updated WhatsApp number to {payload.whatsapp_number}")
+
+    return {
+        "success": True,
+        "message": "Support settings updated successfully."
     }
 
 @app.get("/api/faqs")
